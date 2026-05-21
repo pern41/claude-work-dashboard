@@ -1854,6 +1854,33 @@
     }
     
     loadLeads();
-    </script>
+  </script>
+
+  <script>
+    const sheetURL =
+      "https://docs.google.com/spreadsheets/d/e/2PACX-1vRU3GgePU28T2ce596F7wv7_jo1w31cjFe-gKD5XdFZXISnWdxFlHFjn0cWQ-9gSxckHrOdWmHKcsIR/pub?output=csv";
+    
+    async function loadCSV() {
+      const response = await fetch(sheetURL);
+      const data = await response.text();
+    
+      const rows = data.split("\n");
+    
+      // เอาแถวล่าสุด
+      const latest = rows[rows.length - 1].split(",");
+    
+      const month = latest[0];
+      const followers = latest[1];
+      const revenue = latest[2];
+    
+      document.getElementById("followers").innerText =
+        followers + " Followers";
+    
+      document.getElementById("revenue").innerText =
+        revenue + " THB";
+    }
+    
+    loadCSV();
+  </script>
 </body>
 </html>
