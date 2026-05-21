@@ -1073,6 +1073,7 @@
         <button data-section="money">Monetization <small>09</small></button>
         <button data-section="kpi">KPI <small>10</small></button>
         <button data-section="roadmap">90-Day Plan <small>11</small></button>
+        <button data-section="leads">Leads <small>12</small></button>
       </nav>
 
       <div class="sidebar-card">
@@ -1834,11 +1835,11 @@
         const tr = document.createElement("tr");
     
         tr.innerHTML = `
-          <td>${lead.Name}</td>
-          <td>${lead.Email}</td>
-          <td>${lead.Interest}</td>
-          <td>${lead.Source}</td>
-          <td>${lead.Status}</td>
+          <td>${lead.main_category}</td>
+          <td>${lead.count}</td>
+          <td>${lead.avg_lead_score}</td>
+          <td>${lead.high_score_5}</td>
+          <td>${lead.suggested_offer}</td>
         `;
     
         tbody.appendChild(tr);
