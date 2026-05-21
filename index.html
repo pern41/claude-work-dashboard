@@ -1737,6 +1737,47 @@
           </div>
         </section>
 
+        <section class="section" id="leads">
+            <div class="section-head">
+              <div>
+                <h3>Lead Dashboard</h3>
+                <p>Real-time lead data from Google Sheets.</p>
+              </div>
+              <span class="section-chip">CRM</span>
+            </div>
+          
+            <div class="kpi-grid">
+              <article class="kpi">
+                <span>Total Leads</span>
+                <strong id="totalLeads">0</strong>
+                <small>All collected leads</small>
+              </article>
+          
+              <article class="kpi">
+                <span>Hot Leads</span>
+                <strong id="hotLeads">0</strong>
+                <small>High intent users</small>
+              </article>
+            </div>
+          
+            <div class="card table-card" style="margin-top:18px">
+              <div class="table-scroll">
+                <table id="leadTable">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Interest</th>
+                      <th>Source</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
         <div class="footer-note">
           Strategic recommendation: build the Claude Work Starter Kit first, use it to capture leads and understand audience pain points, then launch the Prompt & Workflow Pack before investing time into a larger course.
         </div>
@@ -1775,5 +1816,44 @@
 
     sections.forEach((section) => observer.observe(section));
   </script>
+
+  <script>
+    async function loadLeads() {
+    
+      const url = "https://https://opensheet.elk.sh/17IsaR_oTsi3u4seLb2-X75zot4VROHXaLGQFG4GkMJU/Leads";
+    
+      const response = await fetch(url);
+      const data = await response.json();
+    
+      const tbody = document.querySelector("#leadTable tbody");
+    
+      let hotCount = 0;
+    
+      data.forEach(lead => {
+    
+        const tr = document.createElement("tr");
+    
+        tr.innerHTML = `
+          <td>${lead.Name}</td>
+          <td>${lead.Email}</td>
+          <td>${lead.Interest}</td>
+          <td>${lead.Source}</td>
+          <td>${lead.Status}</td>
+        `;
+    
+        tbody.appendChild(tr);
+    
+        if (lead.Status === "Hot") {
+          hotCount++;
+        }
+    
+      });
+    
+      document.getElementById("totalLeads").innerText = data.length;
+      document.getElementById("hotLeads").innerText = hotCount;
+    }
+    
+    loadLeads();
+    </script>
 </body>
 </html>
