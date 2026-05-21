@@ -1,0 +1,1975 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MED | AI Health Media Strategy Dashboard</title>
+  <style>
+    :root {
+      --bg: #05070d;
+      --bg-2: #08111c;
+      --surface: rgba(13, 23, 38, 0.72);
+      --surface-2: rgba(19, 32, 52, 0.78);
+      --surface-3: rgba(255, 255, 255, 0.06);
+      --line: rgba(255, 255, 255, 0.13);
+      --line-strong: rgba(61, 220, 255, 0.36);
+      --text: #f4fbff;
+      --muted: #a7b7c9;
+      --faint: #6f8198;
+      --cyan: #30d7ff;
+      --teal: #19e6be;
+      --lime: #a3f35f;
+      --blue: #5ca8ff;
+      --violet: #b891ff;
+      --amber: #ffd166;
+      --rose: #ff6b86;
+      --orange: #ff9f43;
+      --radius: 8px;
+      --shadow: 0 28px 70px rgba(0, 0, 0, 0.38);
+      --font: Inter, "Noto Sans Thai", "Segoe UI", Tahoma, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 15px;
+      line-height: 1.6;
+      background:
+        linear-gradient(145deg, rgba(5, 7, 13, 0.98) 0%, rgba(7, 18, 29, 0.98) 42%, rgba(4, 14, 18, 0.98) 100%),
+        var(--bg);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.18));
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(48, 215, 255, 0.11), transparent 34%, rgba(163, 243, 95, 0.08) 70%, transparent),
+        linear-gradient(180deg, transparent 0%, rgba(255, 209, 102, 0.05) 58%, transparent 100%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .shell {
+      display: grid;
+      grid-template-columns: 292px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 22px;
+      overflow-y: auto;
+      background: rgba(4, 8, 15, 0.76);
+      border-right: 1px solid var(--line);
+      backdrop-filter: blur(22px);
+      box-shadow: 18px 0 60px rgba(0, 0, 0, 0.24);
+    }
+
+    .brand-panel,
+    .glass,
+    .section,
+    .card,
+    .bmc-card,
+    .roadmap-item {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.045));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(22px);
+    }
+
+    .brand-panel {
+      padding: 18px;
+      background:
+        linear-gradient(135deg, rgba(48, 215, 255, 0.14), rgba(25, 230, 190, 0.08)),
+        rgba(255, 255, 255, 0.04);
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      color: #031015;
+      font-weight: 900;
+      font-size: 18px;
+      letter-spacing: 0;
+      background: linear-gradient(135deg, var(--cyan), var(--teal) 55%, var(--lime));
+      box-shadow: 0 12px 32px rgba(48, 215, 255, 0.25);
+    }
+
+    .brand-panel h1 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    .brand-panel p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      margin-top: 14px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      color: #cbfff6;
+      background: rgba(25, 230, 190, 0.10);
+      border: 1px solid rgba(25, 230, 190, 0.28);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--lime);
+      box-shadow: 0 0 18px rgba(163, 243, 95, 0.8);
+    }
+
+    .nav {
+      display: grid;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .nav button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      width: 100%;
+      min-height: 42px;
+      padding: 9px 10px;
+      color: var(--muted);
+      text-align: left;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 160ms ease;
+    }
+
+    .nav button:hover,
+    .nav button.active {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.075);
+      border-color: var(--line);
+      transform: translateX(2px);
+    }
+
+    .nav small {
+      color: var(--faint);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .sidebar-card {
+      margin-top: 18px;
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .sidebar-card strong {
+      display: block;
+      margin-bottom: 7px;
+      color: #eafff9;
+      font-size: 13px;
+    }
+
+    .sidebar-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .progress-shell {
+      position: fixed;
+      top: 0;
+      left: 292px;
+      right: 0;
+      z-index: 40;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--cyan), var(--teal), var(--lime), var(--amber));
+    }
+
+    main {
+      min-width: 0;
+      padding: 28px 28px 56px;
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+      gap: 22px;
+      align-items: stretch;
+      margin-bottom: 22px;
+    }
+
+    .hero-main {
+      min-height: 420px;
+      padding: 34px;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background:
+        linear-gradient(135deg, rgba(48, 215, 255, 0.14), transparent 34%),
+        linear-gradient(215deg, rgba(163, 243, 95, 0.10), transparent 40%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.035));
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 16px;
+      color: #bff7ff;
+      font-size: 13px;
+      font-weight: 850;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 24px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--cyan);
+      box-shadow: 0 0 18px rgba(48, 215, 255, 0.7);
+    }
+
+    h2,
+    h3,
+    h4,
+    p {
+      letter-spacing: 0;
+    }
+
+    .hero h2 {
+      max-width: 850px;
+      margin: 0;
+      font-size: 54px;
+      line-height: 1.03;
+      letter-spacing: 0;
+    }
+
+    .hero-copy {
+      max-width: 760px;
+      margin: 20px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.07);
+      cursor: pointer;
+      transition: 160ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: var(--line-strong);
+      background: rgba(255, 255, 255, 0.10);
+    }
+
+    .btn.primary {
+      color: #031015;
+      border-color: transparent;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--cyan), var(--teal) 58%, var(--lime));
+      box-shadow: 0 16px 42px rgba(48, 215, 255, 0.18);
+    }
+
+    .hero-meta {
+      display: grid;
+      gap: 14px;
+    }
+
+    .northstar {
+      padding: 24px;
+      border-left: 3px solid var(--teal);
+    }
+
+    .northstar span {
+      display: block;
+      color: var(--faint);
+      font-size: 12px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .northstar strong {
+      display: block;
+      margin-top: 8px;
+      color: #ffffff;
+      font-size: 24px;
+      line-height: 1.25;
+    }
+
+    .northstar p {
+      margin: 12px 0 0;
+      color: var(--muted);
+    }
+
+    .signal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .signal {
+      padding: 18px;
+      min-height: 140px;
+    }
+
+    .signal span {
+      display: block;
+      color: var(--faint);
+      font-size: 12px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .signal strong {
+      display: block;
+      margin-top: 8px;
+      color: #ffffff;
+      font-size: 30px;
+      line-height: 1.1;
+    }
+
+    .signal p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .section {
+      scroll-margin-top: 22px;
+      margin-top: 22px;
+      padding: 24px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .section-head h3 {
+      margin: 0;
+      font-size: 27px;
+      line-height: 1.2;
+    }
+
+    .section-head p {
+      max-width: 850px;
+      margin: 8px 0 0;
+      color: var(--muted);
+    }
+
+    .section-chip {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 6px 10px;
+      border: 1px solid rgba(48, 215, 255, 0.30);
+      border-radius: 999px;
+      color: #bff7ff;
+      background: rgba(48, 215, 255, 0.09);
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .two-col,
+    .three-col,
+    .four-col,
+    .bmc-grid,
+    .swot-grid,
+    .roadmap,
+    .persona-grid,
+    .kpi-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .two-col {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .three-col,
+    .persona-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .four-col,
+    .kpi-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .card,
+    .bmc-card,
+    .roadmap-item {
+      padding: 18px;
+      box-shadow: none;
+    }
+
+    .card h4,
+    .bmc-card h4,
+    .roadmap-item h4 {
+      margin: 0 0 10px;
+      font-size: 17px;
+      line-height: 1.25;
+    }
+
+    .card p,
+    .bmc-card p,
+    .roadmap-item p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .list {
+      display: grid;
+      gap: 8px;
+      margin: 12px 0 0;
+      padding: 0;
+      list-style: none;
+      color: var(--muted);
+    }
+
+    .list li {
+      position: relative;
+      padding-left: 17px;
+    }
+
+    .list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.72em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 14px rgba(48, 215, 255, 0.7);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      color: #dffcff;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid var(--line);
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .metric-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .metric {
+      padding: 17px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .metric span {
+      display: block;
+      color: var(--faint);
+      font-size: 12px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 8px;
+      font-size: 29px;
+      line-height: 1.1;
+    }
+
+    .metric p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .bmc-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .bmc-card {
+      position: relative;
+      min-height: 218px;
+      overflow: hidden;
+      border-top: 1px solid rgba(48, 215, 255, 0.36);
+    }
+
+    .bmc-card::after {
+      content: attr(data-block);
+      position: absolute;
+      right: 14px;
+      top: 12px;
+      color: rgba(255, 255, 255, 0.12);
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .bmc-card h4 {
+      max-width: 78%;
+      color: #ecfeff;
+    }
+
+    .chart-box {
+      min-height: 330px;
+    }
+
+    .chart-title {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .chart-title h4 {
+      margin: 0;
+    }
+
+    .chart-title span {
+      color: var(--faint);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .donut-wrap {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 18px;
+      align-items: center;
+    }
+
+    .donut {
+      width: 210px;
+      height: 210px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(9, 16, 25, 1) 0 42%, transparent 43%),
+        conic-gradient(var(--cyan) 0 31%, var(--teal) 31% 55%, var(--amber) 55% 72%, var(--rose) 72% 86%, var(--violet) 86% 100%);
+      border: 1px solid var(--line);
+      box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.08), 0 16px 42px rgba(0, 0, 0, 0.24);
+    }
+
+    .donut strong {
+      font-size: 32px;
+      line-height: 1;
+    }
+
+    .donut span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .legend {
+      display: grid;
+      gap: 10px;
+    }
+
+    .legend div,
+    .bar-line,
+    .comparison-row {
+      display: grid;
+      grid-template-columns: minmax(120px, 1fr) minmax(120px, 2fr) auto;
+      gap: 10px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .swatch {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin-right: 7px;
+      border-radius: 3px;
+      vertical-align: middle;
+    }
+
+    .bars {
+      display: grid;
+      gap: 12px;
+    }
+
+    .bar-track {
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      display: block;
+      height: 100%;
+      width: 60%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--cyan), var(--teal));
+      box-shadow: 0 0 18px rgba(48, 215, 255, 0.35);
+    }
+
+    .matrix-table,
+    .table-card table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .table-scroll {
+      overflow-x: auto;
+    }
+
+    th,
+    td {
+      padding: 13px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: #dffcff;
+      font-size: 12px;
+      font-weight: 850;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    td {
+      color: var(--muted);
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .map-box {
+      position: relative;
+      min-height: 330px;
+      overflow: hidden;
+    }
+
+    .axis-map {
+      position: relative;
+      height: 250px;
+      margin-top: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(90deg, transparent 49.7%, rgba(255, 255, 255, 0.12) 49.8%, rgba(255, 255, 255, 0.12) 50.2%, transparent 50.3%),
+        linear-gradient(0deg, transparent 49.7%, rgba(255, 255, 255, 0.12) 49.8%, rgba(255, 255, 255, 0.12) 50.2%, transparent 50.3%),
+        rgba(255, 255, 255, 0.04);
+    }
+
+    .axis-label {
+      position: absolute;
+      color: var(--faint);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .axis-label.top {
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .axis-label.bottom {
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .axis-label.left {
+      left: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .axis-label.right {
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .point {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 82px;
+      min-height: 34px;
+      padding: 6px 9px;
+      border-radius: 999px;
+      color: #031015;
+      font-size: 12px;
+      font-weight: 900;
+      background: var(--muted);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.28);
+    }
+
+    .point.med {
+      left: 72%;
+      top: 30%;
+      background: linear-gradient(135deg, var(--cyan), var(--teal), var(--lime));
+    }
+
+    .point.viral {
+      left: 70%;
+      top: 70%;
+      background: var(--rose);
+      color: #ffffff;
+    }
+
+    .point.seo {
+      left: 32%;
+      top: 34%;
+      background: var(--amber);
+    }
+
+    .point.influencer {
+      left: 52%;
+      top: 45%;
+      background: var(--violet);
+      color: #ffffff;
+    }
+
+    .swot-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .swot-card {
+      min-height: 238px;
+    }
+
+    .swot-card h4 {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .swot-card h4::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 14px currentColor;
+    }
+
+    .swot-card.strength h4::before {
+      background: var(--teal);
+    }
+
+    .swot-card.weakness h4::before {
+      background: var(--amber);
+    }
+
+    .swot-card.opportunity h4::before {
+      background: var(--lime);
+    }
+
+    .swot-card.threat h4::before {
+      background: var(--rose);
+    }
+
+    .pillar-card {
+      min-height: 210px;
+    }
+
+    .pillar-index {
+      display: inline-flex;
+      width: 34px;
+      height: 34px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      color: #031015;
+      background: var(--cyan);
+      font-weight: 900;
+    }
+
+    .content-engine {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .pipeline {
+      display: grid;
+      gap: 10px;
+    }
+
+    .pipe-step {
+      display: grid;
+      grid-template-columns: 42px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 12px;
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.055);
+      border: 1px solid var(--line);
+    }
+
+    .pipe-step b {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      color: #031015;
+      background: linear-gradient(135deg, var(--cyan), var(--teal));
+    }
+
+    .pipe-step strong {
+      display: block;
+      font-size: 14px;
+    }
+
+    .pipe-step span,
+    .pipe-step small {
+      color: var(--muted);
+    }
+
+    .funnel {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .funnel-step {
+      display: grid;
+      grid-template-columns: 1fr 2fr auto;
+      gap: 12px;
+      align-items: center;
+      min-height: 58px;
+      padding: 13px 15px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      color: #ffffff;
+      background: linear-gradient(90deg, rgba(48, 215, 255, 0.24), rgba(48, 215, 255, 0.06));
+    }
+
+    .funnel-step:nth-child(2) {
+      width: 93%;
+      background: linear-gradient(90deg, rgba(25, 230, 190, 0.25), rgba(25, 230, 190, 0.06));
+    }
+
+    .funnel-step:nth-child(3) {
+      width: 84%;
+      background: linear-gradient(90deg, rgba(163, 243, 95, 0.22), rgba(163, 243, 95, 0.05));
+    }
+
+    .funnel-step:nth-child(4) {
+      width: 74%;
+      background: linear-gradient(90deg, rgba(255, 209, 102, 0.23), rgba(255, 209, 102, 0.05));
+    }
+
+    .funnel-step:nth-child(5) {
+      width: 64%;
+      background: linear-gradient(90deg, rgba(255, 107, 134, 0.25), rgba(255, 107, 134, 0.05));
+    }
+
+    .funnel-step span,
+    .funnel-step small {
+      color: var(--muted);
+    }
+
+    .kpi-card {
+      min-height: 176px;
+      border-top: 2px solid rgba(48, 215, 255, 0.45);
+    }
+
+    .kpi-card strong {
+      display: block;
+      font-size: 30px;
+      line-height: 1;
+      margin: 8px 0;
+    }
+
+    .kpi-card span {
+      color: var(--faint);
+      font-size: 12px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .roadmap {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      position: relative;
+    }
+
+    .roadmap-item {
+      position: relative;
+      min-height: 330px;
+      padding-top: 20px;
+      overflow: hidden;
+    }
+
+    .roadmap-item::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--cyan), var(--teal), var(--lime));
+    }
+
+    .phase-label {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      color: #031015;
+      background: var(--cyan);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .roadmap-item h4 {
+      margin-top: 14px;
+      font-size: 19px;
+    }
+
+    .day-table td:first-child {
+      white-space: nowrap;
+      color: #eaffff;
+      font-weight: 800;
+    }
+
+    .footer-note {
+      margin-top: 22px;
+      padding: 18px;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.055);
+      text-align: center;
+    }
+
+    .print {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 30;
+    }
+
+    @media (max-width: 1220px) {
+      .shell {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: relative;
+        height: auto;
+        padding: 16px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .brand-panel {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+      }
+
+      .status-pill {
+        margin-top: 0;
+      }
+
+      .nav {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+      }
+
+      .nav button {
+        justify-content: center;
+        text-align: center;
+      }
+
+      .nav small {
+        display: none;
+      }
+
+      .sidebar-card {
+        display: none;
+      }
+
+      .progress-shell {
+        left: 0;
+      }
+    }
+
+    @media (max-width: 1040px) {
+      main {
+        padding: 20px 18px 50px;
+      }
+
+      .hero,
+      .two-col,
+      .content-engine {
+        grid-template-columns: 1fr;
+      }
+
+      .three-col,
+      .four-col,
+      .bmc-grid,
+      .roadmap,
+      .persona-grid,
+      .kpi-grid,
+      .metric-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero h2 {
+        font-size: 42px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      body {
+        font-size: 14px;
+      }
+
+      .brand-panel {
+        display: grid;
+      }
+
+      .nav {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .section,
+      .hero-main {
+        padding: 18px;
+      }
+
+      .hero h2 {
+        font-size: 34px;
+      }
+
+      .hero-copy {
+        font-size: 16px;
+      }
+
+      .section-head {
+        display: grid;
+      }
+
+      .three-col,
+      .four-col,
+      .bmc-grid,
+      .swot-grid,
+      .roadmap,
+      .persona-grid,
+      .kpi-grid,
+      .metric-strip,
+      .signal-grid,
+      .donut-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .donut {
+        width: 190px;
+        height: 190px;
+        margin: 0 auto;
+      }
+
+      .legend div,
+      .bar-line,
+      .comparison-row,
+      .funnel-step {
+        grid-template-columns: 1fr;
+      }
+
+      .funnel-step,
+      .funnel-step:nth-child(n) {
+        width: 100%;
+      }
+
+      .print {
+        position: static;
+        margin-top: 18px;
+        width: 100%;
+      }
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+        color: #101820;
+      }
+
+      body::before,
+      body::after,
+      .sidebar,
+      .progress-shell,
+      .print {
+        display: none;
+      }
+
+      .shell {
+        display: block;
+      }
+
+      main {
+        padding: 0;
+      }
+
+      .hero,
+      .section {
+        break-inside: avoid;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress-shell" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand-panel">
+        <div class="brand-row">
+          <div class="logo">MED</div>
+          <div>
+            <h1>AI Health Media Strategy</h1>
+            <p>Business dashboard for MED</p>
+          </div>
+        </div>
+        <div class="status-pill"><span class="status-dot"></span>90-day build plan</div>
+      </div>
+
+      <nav class="nav" aria-label="Dashboard sections">
+        <button class="active" data-section="summary">Executive <small>01</small></button>
+        <button data-section="bmc">BMC <small>02</small></button>
+        <button data-section="market">Market <small>03</small></button>
+        <button data-section="competitor">Competitors <small>04</small></button>
+        <button data-section="swot">SWOT <small>05</small></button>
+        <button data-section="stp">STP <small>06</small></button>
+        <button data-section="brand">Brand <small>07</small></button>
+        <button data-section="content">Content <small>08</small></button>
+        <button data-section="money">Monetization <small>09</small></button>
+        <button data-section="kpi">KPI <small>10</small></button>
+        <button data-section="roadmap">90-Day Plan <small>11</small></button>
+      </nav>
+
+      <div class="sidebar-card">
+        <strong>Strategic thesis</strong>
+        <p>MED should evolve from a posting page into a trust-led Health Media System using SEO, short-form content, community, and AI-assisted workflows.</p>
+      </div>
+    </aside>
+
+    <main>
+      <section class="hero" id="top">
+        <div class="hero-main glass">
+          <p class="eyebrow">Modern strategy dashboard</p>
+          <h2>MED as Thailand's trusted AI-powered health media system</h2>
+          <p class="hero-copy">A production-ready business strategy dashboard built from the MED executive summary: trusted health education, practical Thai content, SEO traffic, social reach, community building, and future monetization through sponsorship, affiliate, advertorial, and owned health products.</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#roadmap">View 90-Day Plan</a>
+            <a class="btn" href="#kpi">Review KPIs</a>
+            <a class="btn" href="#bmc">Open Business Model</a>
+          </div>
+
+          <div class="metric-strip">
+            <div class="metric">
+              <span>Month 1 target</span>
+              <strong>5K</strong>
+              <p>Followers with foundation content and SEO setup.</p>
+            </div>
+            <div class="metric">
+              <span>Month 3 target</span>
+              <strong>300K</strong>
+              <p>Monthly reach from daily Reels, TikTok, and Facebook posts.</p>
+            </div>
+            <div class="metric">
+              <span>Month 6 target</span>
+              <strong>30K</strong>
+              <p>Website visits per month from evergreen health search.</p>
+            </div>
+            <div class="metric">
+              <span>Month 12 target</span>
+              <strong>50K</strong>
+              <p>THB monthly revenue through partners and campaigns.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-meta">
+          <div class="northstar glass">
+            <span>North Star Positioning</span>
+            <strong>ข้อมูลสุขภาพที่เข้าใจง่าย น่าเชื่อถือ และทันสมัย</strong>
+            <p>MED wins by translating trusted health knowledge into short, practical, visually clear content that older audiences and family sharers can understand quickly.</p>
+          </div>
+          <div class="signal-grid">
+            <div class="signal glass">
+              <span>Core strategy</span>
+              <strong>Trust + Traffic</strong>
+              <p>Combine credible sourcing with high-share short content and search-friendly articles.</p>
+            </div>
+            <div class="signal glass">
+              <span>Operating model</span>
+              <strong>AI Workflow</strong>
+              <p>SOPs, templates, prompts, knowledge base, and analytics rhythm reduce team dependency.</p>
+            </div>
+            <div class="signal glass">
+              <span>Audience engine</span>
+              <strong>Social + SEO</strong>
+              <p>Facebook, Instagram, TikTok, website SEO, Google Discover, and LINE OA.</p>
+            </div>
+            <div class="signal glass">
+              <span>Revenue path</span>
+              <strong>Sponsors</strong>
+              <p>Media kit, health brand partnerships, advertorial, affiliate, and campaigns.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="summary">
+        <div class="section-head">
+          <div>
+            <h3>Executive Summary</h3>
+            <p>MED is a company health page designed to build brand presence online, educate audiences, and keep the business visible across social media through short, understandable, practical health content.</p>
+          </div>
+          <span class="section-chip">Strategic Core</span>
+        </div>
+
+        <div class="two-col">
+          <article class="card">
+            <h4>What MED Should Become</h4>
+            <p>MED should not remain only a content posting page. The stronger long-term model is a Health Media System that creates traffic, trust, community, leads, and revenue while remaining operational even when team members change.</p>
+            <ul class="list">
+              <li>Publish practical health knowledge from credible sources.</li>
+              <li>Use short-form social content for reach and sharing.</li>
+              <li>Use website SEO for durable organic traffic.</li>
+              <li>Use LINE OA and community loops for retention and recruitment.</li>
+            </ul>
+          </article>
+
+          <article class="card chart-box">
+            <div class="chart-title">
+              <h4>Growth System Overview</h4>
+              <span>Operating flywheel</span>
+            </div>
+            <div class="pipeline">
+              <div class="pipe-step"><b>1</b><div><strong>Research</strong><span>Trends, trusted sources, Thai audience pain points</span></div><small>Input</small></div>
+              <div class="pipe-step"><b>2</b><div><strong>Produce</strong><span>Hook, script, infographic, Reels, article</span></div><small>Output</small></div>
+              <div class="pipe-step"><b>3</b><div><strong>Distribute</strong><span>Facebook, TikTok, Instagram, Website, LINE OA</span></div><small>Reach</small></div>
+              <div class="pipe-step"><b>4</b><div><strong>Measure</strong><span>Reach, shares, watch time, saves, SEO, leads</span></div><small>Data</small></div>
+              <div class="pipe-step"><b>5</b><div><strong>Scale</strong><span>Repeat winners, build media kit, sell partners</span></div><small>Revenue</small></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="bmc">
+        <div class="section-head">
+          <div>
+            <h3>Business Model Canvas</h3>
+            <p>The BMC frames MED as an AI-assisted health media business, balancing credible health education, social distribution, website SEO, and future monetization.</p>
+          </div>
+          <span class="section-chip">9 Blocks</span>
+        </div>
+
+        <div class="bmc-grid">
+          <article class="bmc-card" data-block="01">
+            <h4>Key Partners</h4>
+            <ul class="list">
+              <li>Doctors, pharmacists, hospitals, wellness brands.</li>
+              <li>Health creators, communities, and partner pages.</li>
+              <li>AI, SEO, design, analytics, and hosting tools.</li>
+            </ul>
+          </article>
+          <article class="bmc-card" data-block="02">
+            <h4>Key Activities</h4>
+            <ul class="list">
+              <li>Research and fact-check health topics.</li>
+              <li>Create Reels, posts, infographics, SEO articles.</li>
+              <li>Manage community, analytics, and sponsor pipeline.</li>
+            </ul>
+          </article>
+          <article class="bmc-card" data-block="03">
+            <h4>Value Proposition</h4>
+            <ul class="list">
+              <li>Trusted health content that is easy to understand.</li>
+              <li>Practical daily tips for prevention and self-care.</li>
+              <li>Modern visuals with credible source discipline.</li>
+            </ul>
+          </article>
+          <article class="bmc-card" data-block="04">
+            <h4>Customer Relationships</h4>
+            <ul class="list">
+              <li>Educational, friendly, and responsive tone.</li>
+              <li>Q&A through comments, inbox, and LINE OA.</li>
+              <li>Community trust built through consistency.</li>
+            </ul>
+          </article>
+          <article class="bmc-card" data-block="05">
+            <h4>Customer Segments</h4>
+            <ul class="list">
+              <li>Primary: adults 50-70 and family sharers.</li>
+              <li>Growth: 20-35 health-conscious social users.</li>
+              <li>Commercial: health brands and wellness partners.</li>
+            </ul>
+          </article>
+          <article class="bmc-card" data-block="06">
+            <h4>Channels</h4>
+            <ul class="list">
+              <li>Facebook Fanpage, Instagram, TikTok, Reels.</li>
+              <li>Company website, Google Search, Google Discover.</li>
+              <li>LINE OA and health interest communities.</li>
+            </ul>
+          </article>
+          <article class="bmc-card" data-block="07">
+            <h4>Key Resources</h4>
+            <ul class="list">
+              <li>SOP, content calendar, templates, AI prompts.</li>
+              <li>Knowledge database and source library.</li>
+              <li>Editorial, design, video, SEO, and admin team.</li>
+            </ul>
+          </article>
+          <article class="bmc-card" data-block="08">
+            <h4>Cost Structure</h4>
+            <ul class="list">
+              <li>Content production: 16K-55K THB per month.</li>
+              <li>Tools and software: 3.2K-13K THB per month.</li>
+              <li>Ads and team budget scale with growth stage.</li>
+            </ul>
+          </article>
+          <article class="bmc-card" data-block="09">
+            <h4>Revenue Streams</h4>
+            <ul class="list">
+              <li>Sponsored content, advertorial, affiliate.</li>
+              <li>Platform ads, brand campaigns, partnerships.</li>
+              <li>Future products, courses, and health community.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="market">
+        <div class="section-head">
+          <div>
+            <h3>Market Analysis</h3>
+            <p>Thailand's health and wellness content market is growing because people increasingly search for practical prevention, wellness, fitness, food, and self-care information through social media rather than academic sources.</p>
+          </div>
+          <span class="section-chip">Opportunity</span>
+        </div>
+
+        <div class="two-col">
+          <article class="card chart-box">
+            <div class="chart-title">
+              <h4>Attention Mix Placeholder</h4>
+              <span>Illustrative split</span>
+            </div>
+            <div class="donut-wrap">
+              <div class="donut"><div><strong>5</strong><span>growth engines</span></div></div>
+              <div class="legend">
+                <div><span><i class="swatch" style="background: var(--cyan)"></i>Short-form health education</span><b>31%</b></div>
+                <div><span><i class="swatch" style="background: var(--teal)"></i>Trust-based expert content</span><b>24%</b></div>
+                <div><span><i class="swatch" style="background: var(--amber)"></i>SEO evergreen articles</span><b>17%</b></div>
+                <div><span><i class="swatch" style="background: var(--rose)"></i>Community engagement</span><b>14%</b></div>
+                <div><span><i class="swatch" style="background: var(--violet)"></i>AI-assisted production</span><b>14%</b></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <h4>Market Trends MED Can Use</h4>
+            <ul class="list">
+              <li>Short-form content gets high engagement when the hook is specific and urgent.</li>
+              <li>Edutainment makes health knowledge less intimidating and more shareable.</li>
+              <li>Trust-based content matters more as AI-generated spam increases.</li>
+              <li>SEO health articles can compound traffic over time.</li>
+              <li>Community-led brands generate loyalty and repeat engagement.</li>
+              <li>Personalized health advice is rising, but requires careful credibility controls.</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="persona-grid" style="margin-top:16px">
+          <article class="card">
+            <h4>Primary Audience</h4>
+            <p>Adults 50-70, Baby Boomers, and older family members who need simple, credible health information without technology complexity.</p>
+            <div class="tag-row"><span class="tag">Easy language</span><span class="tag">Trust</span><span class="tag">Daily use</span></div>
+          </article>
+          <article class="card">
+            <h4>Family Sharers</h4>
+            <p>Children and relatives who share useful health tips with parents or senior family members through Facebook, LINE, and community groups.</p>
+            <div class="tag-row"><span class="tag">Shareable</span><span class="tag">Practical</span><span class="tag">LINE OA</span></div>
+          </article>
+          <article class="card">
+            <h4>Growth Audience</h4>
+            <p>Health-conscious people aged 20-35 interested in fitness, weight control, quick self-care, and prevention-first habits.</p>
+            <div class="tag-row"><span class="tag">Reels</span><span class="tag">TikTok</span><span class="tag">Biohacking</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="competitor">
+        <div class="section-head">
+          <div>
+            <h3>Competitor Analysis</h3>
+            <p>MED competes directly with viral health pages, hospital and clinic content, doctor-led pages, SEO health websites, and health influencers. Indirect competition includes lifestyle, food, fitness, podcasts, and creators who compete for attention.</p>
+          </div>
+          <span class="section-chip">Positioning</span>
+        </div>
+
+        <div class="two-col">
+          <article class="card table-card">
+            <h4>Competitor Comparison</h4>
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Factor</th>
+                    <th>MED</th>
+                    <th>Viral Page</th>
+                    <th>SEO Website</th>
+                    <th>Influencer</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Credibility</td><td>High</td><td>Medium</td><td>High</td><td>High</td></tr>
+                  <tr><td>Ease of understanding</td><td>High</td><td>High</td><td>Low</td><td>High</td></tr>
+                  <tr><td>SEO strength</td><td>Building</td><td>Low</td><td>High</td><td>Low</td></tr>
+                  <tr><td>Viral potential</td><td>High</td><td>Very high</td><td>Low</td><td>Medium</td></tr>
+                  <tr><td>Community</td><td>Building</td><td>Medium</td><td>Low</td><td>High</td></tr>
+                  <tr><td>Scalability</td><td>High</td><td>High</td><td>High</td><td>Medium</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="card map-box">
+            <h4>Positioning Map Placeholder</h4>
+            <p>MED's best position is high trust plus high shareability: more credible than viral pages and more modern than traditional SEO content.</p>
+            <div class="axis-map">
+              <span class="axis-label top">High Trust</span>
+              <span class="axis-label bottom">Low Trust</span>
+              <span class="axis-label left">Low Share</span>
+              <span class="axis-label right">High Share</span>
+              <span class="point med">MED</span>
+              <span class="point viral">Viral</span>
+              <span class="point seo">SEO Site</span>
+              <span class="point influencer">Creator</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="swot">
+        <div class="section-head">
+          <div>
+            <h3>SWOT Matrix</h3>
+            <p>The strategy should protect credibility while using speed, AI workflow, visual quality, and multi-channel distribution to grow faster than traditional health media.</p>
+          </div>
+          <span class="section-chip">Decision Matrix</span>
+        </div>
+
+        <div class="swot-grid">
+          <article class="card swot-card strength">
+            <h4>Strengths</h4>
+            <ul class="list">
+              <li>Can produce many content formats across social and website.</li>
+              <li>AI can accelerate research, drafting, captions, and workflow.</li>
+              <li>SEO and social can grow together instead of separately.</li>
+              <li>Content pipeline can become a repeatable operating system.</li>
+            </ul>
+          </article>
+          <article class="card swot-card weakness">
+            <h4>Weaknesses</h4>
+            <ul class="list">
+              <li>Brand awareness is still low and must be built from zero.</li>
+              <li>Community is not yet strong enough for loyalty effects.</li>
+              <li>Trust takes time, consistency, and source discipline.</li>
+              <li>Team changes require SOPs, prompt files, and handoff systems.</li>
+            </ul>
+          </article>
+          <article class="card swot-card opportunity">
+            <h4>Opportunities</h4>
+            <ul class="list">
+              <li>Health and wellness demand keeps growing in Thailand.</li>
+              <li>Short-form and shareable practical tips still have upside.</li>
+              <li>Google rewards helpful health content when it is useful and reliable.</li>
+              <li>Brands still value trusted publishers even in the AI content era.</li>
+            </ul>
+          </article>
+          <article class="card swot-card threat">
+            <h4>Threats</h4>
+            <ul class="list">
+              <li>Competition is high and audience attention is fragmented.</li>
+              <li>Platform algorithms can change without warning.</li>
+              <li>AI-generated spam can reduce trust in health content broadly.</li>
+              <li>Wrong health information can damage credibility quickly.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="stp">
+        <div class="section-head">
+          <div>
+            <h3>STP Framework</h3>
+            <p>MED should segment by health intent and content behavior, target the easiest shareable pain points first, and position itself as the modern credible health page for everyday Thai audiences.</p>
+          </div>
+          <span class="section-chip">Segmentation</span>
+        </div>
+
+        <div class="three-col">
+          <article class="card pillar-card">
+            <span class="pillar-index">S</span>
+            <h4>Segmentation</h4>
+            <ul class="list">
+              <li>Seniors and families seeking simple health guidance.</li>
+              <li>Busy working adults with little time for self-care.</li>
+              <li>Fitness, weight-loss, preventive care, and wellness trend audiences.</li>
+            </ul>
+          </article>
+          <article class="card pillar-card">
+            <span class="pillar-index" style="background: var(--teal)">T</span>
+            <h4>Targeting</h4>
+            <ul class="list">
+              <li>Primary: 50-70 and family sharers on Facebook and LINE.</li>
+              <li>Growth: 20-35 on Reels, TikTok, and SEO search.</li>
+              <li>Business: wellness brands needing trusted Thai media.</li>
+            </ul>
+          </article>
+          <article class="card pillar-card">
+            <span class="pillar-index" style="background: var(--lime)">P</span>
+            <h4>Positioning</h4>
+            <ul class="list">
+              <li>Health content that blends trust, simplicity, and viral readability.</li>
+              <li>Modern visual health explainers backed by credible sources.</li>
+              <li>A dependable companion for prevention-first everyday choices.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="brand">
+        <div class="section-head">
+          <div>
+            <h3>Brand Strategy</h3>
+            <p>MED should feel professional, caring, modern, and easy to share. The brand system should make health knowledge less intimidating while preserving medical credibility.</p>
+          </div>
+          <span class="section-chip">Identity</span>
+        </div>
+
+        <div class="four-col">
+          <article class="card">
+            <h4>Brand Promise</h4>
+            <p>ข้อมูลสุขภาพที่อ่านง่าย แชร์ง่าย และใช้ได้จริงในชีวิตประจำวัน.</p>
+            <div class="tag-row"><span class="tag">Practical</span><span class="tag">Clear</span></div>
+          </article>
+          <article class="card">
+            <h4>Tone of Voice</h4>
+            <p>Friendly, calm, concise, and source-aware. Avoid alarmist health claims unless the evidence supports urgency.</p>
+            <div class="tag-row"><span class="tag">Human</span><span class="tag">Credible</span></div>
+          </article>
+          <article class="card">
+            <h4>Visual System</h4>
+            <p>Clean AI-health palette: cyan, teal, lime, amber, rose, and high-contrast dark surfaces for digital authority.</p>
+            <div class="tag-row"><span class="tag">AI tech</span><span class="tag">Health</span></div>
+          </article>
+          <article class="card">
+            <h4>Trust Signals</h4>
+            <p>Use source notes, reviewer labels, expert quotes, simple disclaimers, and article links in social captions.</p>
+            <div class="tag-row"><span class="tag">Sources</span><span class="tag">Review</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="content">
+        <div class="section-head">
+          <div>
+            <h3>Content Strategy</h3>
+            <p>The content engine should combine viral hooks, credible source research, visual templates, SEO articles, community posting, and analytics loops.</p>
+          </div>
+          <span class="section-chip">Content Engine</span>
+        </div>
+
+        <div class="content-engine">
+          <article class="card chart-box">
+            <div class="chart-title">
+              <h4>Content Mix Placeholder</h4>
+              <span>Weekly production</span>
+            </div>
+            <div class="bars">
+              <div class="bar-line"><span>Reels / TikTok</span><div class="bar-track"><span class="bar-fill" style="width: 92%"></span></div><b>Daily</b></div>
+              <div class="bar-line"><span>Facebook posts</span><div class="bar-track"><span class="bar-fill" style="width: 82%; background: linear-gradient(90deg, var(--teal), var(--lime))"></span></div><b>2-3/day</b></div>
+              <div class="bar-line"><span>SEO articles</span><div class="bar-track"><span class="bar-fill" style="width: 64%; background: linear-gradient(90deg, var(--amber), var(--orange))"></span></div><b>3-4/wk</b></div>
+              <div class="bar-line"><span>Community posts</span><div class="bar-track"><span class="bar-fill" style="width: 58%; background: linear-gradient(90deg, var(--rose), var(--violet))"></span></div><b>Daily</b></div>
+              <div class="bar-line"><span>Analytics review</span><div class="bar-track"><span class="bar-fill" style="width: 42%; background: linear-gradient(90deg, var(--blue), var(--cyan))"></span></div><b>Weekly</b></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <h4>Content Pillars</h4>
+            <ul class="list">
+              <li>Preventive care: early symptoms, daily habits, disease prevention.</li>
+              <li>Practical tips: food, sleep, exercise, medicine safety, health checks.</li>
+              <li>Myth busting: correct misinformation with simple explanations.</li>
+              <li>SEO evergreen: translated and summarized health topics from credible sources.</li>
+              <li>Community: questions, polls, challenges, and LINE OA retention.</li>
+            </ul>
+            <div class="funnel">
+              <div class="funnel-step"><b>Hook</b><span>อาการเล็ก ๆ ที่คุณมองข้าม อาจเป็น...</span><small>Stop scroll</small></div>
+              <div class="funnel-step"><b>Explain</b><span>สรุปสั้น เข้าใจง่าย พร้อมภาพประกอบ</span><small>Educate</small></div>
+              <div class="funnel-step"><b>Action</b><span>ทำตามได้จริงวันนี้ หรือส่งต่อให้ครอบครัว</span><small>Share</small></div>
+              <div class="funnel-step"><b>Link</b><span>ใส่บทความเว็บไซต์เมื่อมีเนื้อหาที่เกี่ยวข้อง</span><small>Traffic</small></div>
+              <div class="funnel-step"><b>Retain</b><span>ชวนเข้า LINE OA หรือ Community</span><small>Loyalty</small></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="money">
+        <div class="section-head">
+          <div>
+            <h3>Monetization Strategy</h3>
+            <p>MED should build monetization after credibility and traffic are visible. Sponsors need reach, engagement, clear audience data, and confidence that the team can deliver accurate content on schedule.</p>
+          </div>
+          <span class="section-chip">Revenue Design</span>
+        </div>
+
+        <div class="four-col">
+          <article class="card">
+            <h4>Sponsored Content</h4>
+            <p>Partner with wellness, hospital, supplement, insurance, and health service brands once trust metrics are established.</p>
+            <div class="tag-row"><span class="tag">Media kit</span><span class="tag">Campaign</span></div>
+          </article>
+          <article class="card">
+            <h4>Advertorial + SEO</h4>
+            <p>Publish sponsor-friendly evergreen articles that remain discoverable through Google search.</p>
+            <div class="tag-row"><span class="tag">Organic</span><span class="tag">Long-tail</span></div>
+          </article>
+          <article class="card">
+            <h4>Affiliate</h4>
+            <p>Use carefully selected health and wellness products that fit the brand's trust standards.</p>
+            <div class="tag-row"><span class="tag">Low risk</span><span class="tag">Trackable</span></div>
+          </article>
+          <article class="card">
+            <h4>Products / Courses</h4>
+            <p>Future guides, mini courses, challenges, and paid community programs around preventive health.</p>
+            <div class="tag-row"><span class="tag">Owned</span><span class="tag">Scalable</span></div>
+          </article>
+        </div>
+
+        <div class="two-col" style="margin-top:16px">
+          <article class="card chart-box">
+            <div class="chart-title">
+              <h4>Revenue Ladder Placeholder</h4>
+              <span>Path to 50K THB/mo</span>
+            </div>
+            <div class="bars">
+              <div class="bar-line"><span>Boosted content / ads</span><div class="bar-track"><span class="bar-fill" style="width: 30%"></span></div><b>5K</b></div>
+              <div class="bar-line"><span>Affiliate content</span><div class="bar-track"><span class="bar-fill" style="width: 42%; background: linear-gradient(90deg, var(--teal), var(--lime))"></span></div><b>12K</b></div>
+              <div class="bar-line"><span>Advertorial</span><div class="bar-track"><span class="bar-fill" style="width: 62%; background: linear-gradient(90deg, var(--amber), var(--orange))"></span></div><b>25K</b></div>
+              <div class="bar-line"><span>Sponsored campaign</span><div class="bar-track"><span class="bar-fill" style="width: 100%; background: linear-gradient(90deg, var(--blue), var(--violet))"></span></div><b>50K</b></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <h4>Sponsor Readiness Checklist</h4>
+            <ul class="list">
+              <li>Build trust-based content for 1-6 months before outbound selling.</li>
+              <li>Prepare media kit with reach, engagement, audience, formats, and case posts.</li>
+              <li>Show website traffic and Google ranking as long-term sponsor value.</li>
+              <li>Offer sponsored video, advertorial, health campaign, and creator collaboration packages.</li>
+              <li>Use AI workflow to deliver faster while keeping human review on health claims.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="kpi">
+        <div class="section-head">
+          <div>
+            <h3>KPI Dashboard</h3>
+            <p>Track MED as one funnel: reach creates awareness, engagement proves relevance, website and LINE OA capture intent, and sponsor revenue validates business value.</p>
+          </div>
+          <span class="section-chip">Measurement</span>
+        </div>
+
+        <div class="kpi-grid">
+          <article class="card kpi-card">
+            <span>Followers</span>
+            <strong>10K</strong>
+            <p>6-month SMART target from consistent health content and community sharing.</p>
+          </article>
+          <article class="card kpi-card">
+            <span>Engagement Rate</span>
+            <strong>8%+</strong>
+            <p>3-month target using strong hooks, saves, shares, and open-ended questions.</p>
+          </article>
+          <article class="card kpi-card">
+            <span>Website Visits</span>
+            <strong>30K</strong>
+            <p>Monthly target by month 6 through evergreen SEO and article links.</p>
+          </article>
+          <article class="card kpi-card">
+            <span>Revenue</span>
+            <strong>50K</strong>
+            <p>Monthly target by month 7-12 through sponsors and campaigns.</p>
+          </article>
+        </div>
+
+        <div class="two-col" style="margin-top:16px">
+          <article class="card">
+            <h4>Metric Families</h4>
+            <div class="comparison-row"><span>Social</span><div class="bar-track"><span class="bar-fill" style="width: 86%"></span></div><b>Reach, ER, shares</b></div>
+            <div class="comparison-row"><span>Website</span><div class="bar-track"><span class="bar-fill" style="width: 72%; background: linear-gradient(90deg, var(--teal), var(--lime))"></span></div><b>SEO, CTR, sessions</b></div>
+            <div class="comparison-row"><span>Business</span><div class="bar-track"><span class="bar-fill" style="width: 55%; background: linear-gradient(90deg, var(--amber), var(--orange))"></span></div><b>Leads, ROI, revenue</b></div>
+            <div class="comparison-row"><span>Quality</span><div class="bar-track"><span class="bar-fill" style="width: 68%; background: linear-gradient(90deg, var(--rose), var(--violet))"></span></div><b>Accuracy, trust</b></div>
+          </article>
+
+          <article class="card">
+            <h4>Marketing Funnel Visualization</h4>
+            <div class="funnel">
+              <div class="funnel-step"><b>Awareness</b><span>Reels, Facebook posts, trend health topics</span><small>Reach</small></div>
+              <div class="funnel-step"><b>Engagement</b><span>Comments, saves, shares, questions</span><small>Interaction</small></div>
+              <div class="funnel-step"><b>Traffic</b><span>Website articles, Google search, internal links</span><small>SEO</small></div>
+              <div class="funnel-step"><b>Lead</b><span>LINE OA, community, forms, campaign CTAs</span><small>Database</small></div>
+              <div class="funnel-step"><b>Revenue</b><span>Sponsor, advertorial, affiliate, product</span><small>Income</small></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="roadmap">
+        <div class="section-head">
+          <div>
+            <h3>90-Day Action Plan</h3>
+            <p>The first 90 days should install the content operating system, test high-performing formats, and prepare the brand assets needed for SEO, community growth, and future sponsor outreach.</p>
+          </div>
+          <span class="section-chip">Execution</span>
+        </div>
+
+        <div class="roadmap">
+          <article class="roadmap-item">
+            <span class="phase-label">Days 1-30</span>
+            <h4>Setup & Foundation</h4>
+            <p>Build the base: branding, SOP, templates, content pillars, website readiness, and first SEO articles.</p>
+            <ul class="list">
+              <li>Define mood, tone, source rules, and visual identity.</li>
+              <li>Create SOP, prompt file, content calendar, and template pack.</li>
+              <li>Open or optimize Facebook, TikTok, Instagram, Website, LINE OA.</li>
+              <li>Publish first 20 SEO articles and daily social content.</li>
+            </ul>
+          </article>
+          <article class="roadmap-item">
+            <span class="phase-label" style="background: var(--teal)">Days 31-60</span>
+            <h4>Growth & Validation</h4>
+            <p>Push reach and engagement while discovering the most repeatable formats, hooks, and audience pain points.</p>
+            <ul class="list">
+              <li>Post Reels and TikTok daily with multiple hook styles.</li>
+              <li>Share content into relevant communities and answer comments.</li>
+              <li>Run weekly analytics reviews to identify top topics.</li>
+              <li>Start creator collaboration and content format experiments.</li>
+            </ul>
+          </article>
+          <article class="roadmap-item">
+            <span class="phase-label" style="background: var(--lime)">Days 61-90</span>
+            <h4>Scale & Sponsor Prep</h4>
+            <p>Turn early audience data into a sponsor-ready growth story while deepening SEO and community retention.</p>
+            <ul class="list">
+              <li>Build media kit with audience, reach, engagement, and sample formats.</li>
+              <li>Create lead capture loops through LINE OA and website CTAs.</li>
+              <li>Publish evergreen SEO clusters and internal links.</li>
+              <li>Prepare first sponsored content package and partnership list.</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="card table-card" style="margin-top:16px">
+          <h4>First 7-Day Sprint</h4>
+          <div class="table-scroll">
+            <table class="day-table">
+              <thead>
+                <tr>
+                  <th>Day</th>
+                  <th>Key Task</th>
+                  <th>Output</th>
+                  <th>Success Signal</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Day 1</td><td>Clarify positioning and promise</td><td>One-line positioning, bio, CTA</td><td>Team can explain MED in one sentence</td></tr>
+                <tr><td>Day 2</td><td>Map content pillars</td><td>30-day calendar and post categories</td><td>Production queue ready</td></tr>
+                <tr><td>Day 3</td><td>Create source and review rules</td><td>Credibility checklist</td><td>Lower misinformation risk</td></tr>
+                <tr><td>Day 4</td><td>Design templates</td><td>Infographic, quote, Reel cover, article card</td><td>Faster production</td></tr>
+                <tr><td>Day 5</td><td>Publish first test batch</td><td>Posts, Reels, article links</td><td>Initial reach and comments</td></tr>
+                <tr><td>Day 6</td><td>Community distribution</td><td>Group shares and LINE OA prompt</td><td>Shares and saves improve</td></tr>
+                <tr><td>Day 7</td><td>Analytics review</td><td>Winner topics and format notes</td><td>Next sprint is evidence-based</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer-note">
+        Strategic recommendation: make MED a repeatable content and trust system first, then monetize through sponsor-ready audience data, SEO assets, and health brand partnerships.
+      </div>
+
+      <button class="btn primary print" type="button" onclick="window.print()">Print / PDF</button>
+    </main>
+  </div>
+
+  <script>
+    const navButtons = Array.from(document.querySelectorAll(".nav button"));
+    const sections = navButtons
+      .map((button) => document.getElementById(button.dataset.section))
+      .filter(Boolean);
+    const progressBar = document.getElementById("progressBar");
+
+    navButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const target = document.getElementById(button.dataset.section);
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!visible) return;
+
+      navButtons.forEach((button) => {
+        button.classList.toggle("active", button.dataset.section === visible.target.id);
+      });
+    }, { rootMargin: "-18% 0px -68% 0px", threshold: [0.08, 0.18, 0.32] });
+
+    sections.forEach((section) => observer.observe(section));
+
+    const updateProgress = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = max > 0 ? (window.scrollY / max) * 100 : 0;
+      progressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
+    };
+
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    updateProgress();
+  </script>
+</body>
+</html>
