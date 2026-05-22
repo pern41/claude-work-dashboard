@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SOP: HR & Recruitment | Med4u</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:'Prompt',sans-serif;
+      background:#0b1020;
+      color:#f5f7ff;
+      display:flex;
+    }
+
+    /* TOGGLE BUTTON */
+
+    .toggle-btn{
+      position:fixed;
+      top:20px;
+      left:20px;
+      z-index:1001;
+
+      background:#2563eb;
+      color:white;
+
+      border:none;
+      width:50px;
+      height:50px;
+
+      border-radius:14px;
+      cursor:pointer;
+
+      font-size:1.2rem;
+
+      box-shadow:0 10px 30px rgba(0,0,0,.3);
+
+      transition:.3s;
+    }
+
+    .toggle-btn:hover{
+      transform:scale(1.05);
+    }
+
+    /* SIDEBAR */
+
+    aside{
+      width:280px;
+      height:100vh;
+
+      position:fixed;
+      left:0;
+      top:0;
+
+      background:#081120;
+
+      border-right:1px solid rgba(255,255,255,.08);
+
+      padding:30px 22px;
+
+      overflow-y:auto;
+
+      transition:.35s ease;
+      z-index:1000;
+    }
+
+    aside.closed{
+      transform:translateX(-100%);
+    }
+
+    .logo{
+      margin-bottom:35px;
+
+      padding:22px;
+
+      border-radius:22px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(37,99,235,.25),
+          rgba(15,23,42,.95)
+        );
+
+      border:1px solid rgba(96,165,250,.25);
+
+      box-shadow:
+        0 10px 30px rgba(0,0,0,.35),
+        inset 0 1px 0 rgba(255,255,255,.05);
+
+      position:relative;
+
+      overflow:hidden;
+    }
+
+    .logo::before{
+      content:"";
+
+      position:absolute;
+
+      top:-40px;
+      right:-40px;
+
+      width:120px;
+      height:120px;
+
+      background:rgba(96,165,250,.12);
+
+      border-radius:50%;
+
+      filter:blur(10px);
+    }
+
+
+    .logo h2{
+      font-size:1.6rem;
+
+      color:#ffffff;
+
+      margin-bottom:6px;
+
+      position:relative;
+      z-index:2;
+    }
+
+    .logo p{
+      font-size:.92rem;
+
+      color:#bfdbfe;
+
+      opacity:.9;
+
+      position:relative;
+      z-index:2;
+    }
+
+    .menu{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .menu a{
+      text-decoration:none;
+      color:#dbeafe;
+
+      padding:14px 16px;
+
+      border-radius:14px;
+
+      transition:.25s;
+
+      border:1px solid transparent;
+    }
+
+    .menu a:hover{
+      background:#172554;
+      border-color:#3b82f6;
+      transform:translateX(4px);
+    }
+
+    /* MAIN */
+
+    main{
+      margin-left:280px;
+      width:calc(100% - 280px);
+
+      padding:40px;
+
+      transition:.35s ease;
+    }
+
+    main.full{
+      margin-left:0;
+      width:100%;
+    }
+
+    /* HERO */
+
+    .hero{
+      background:linear-gradient(135deg,#1d4ed8,#0f172a);
+
+      padding:60px;
+
+      border-radius:30px;
+
+      margin-bottom:30px;
+
+      box-shadow:0 20px 60px rgba(0,0,0,.35);
+    }
+
+    .badge{
+      display:inline-block;
+
+      background:#2563eb;
+
+      padding:7px 15px;
+
+      border-radius:999px;
+
+      font-size:.85rem;
+
+      margin-bottom:18px;
+    }
+
+    .hero h1{
+      font-size:3rem;
+      margin-bottom:12px;
+    }
+
+    .hero p{
+      opacity:.85;
+      max-width:700px;
+    }
+
+    /* SECTIONS */
+
+    section{
+      background:rgba(255,255,255,.04);
+
+      border:1px solid rgba(255,255,255,.08);
+
+      padding:35px;
+
+      border-radius:24px;
+
+      margin-bottom:25px;
+    }
+
+    section h2{
+      color:#60a5fa;
+
+      margin-bottom:20px;
+
+      font-size:1.8rem;
+    }
+
+    section h3{
+      color:#93c5fd;
+
+      margin-top:25px;
+
+      margin-bottom:10px;
+    }
+
+    ul{
+      padding-left:20px;
+    }
+
+    li{
+      margin-bottom:10px;
+    }
+
+    /* CARDS */
+
+    .workflow-grid{
+      display:grid;
+
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+      gap:20px;
+
+      margin-top:25px;
+    }
+
+    .card{
+      background:#111827;
+
+      padding:25px;
+
+      border-radius:20px;
+
+      border:1px solid rgba(255,255,255,.08);
+
+      transition:.3s;
+    }
+
+    .card:hover{
+      transform:translateY(-6px);
+
+      border-color:#3b82f6;
+    }
+
+    .card h4{
+      color:#60a5fa;
+
+      margin-bottom:15px;
+    }
+
+    .check{
+      margin-top:15px;
+
+      padding:14px;
+
+      border-radius:14px;
+
+      background:rgba(37,99,235,.12);
+    }
+
+    /* KPI */
+
+    .kpi-grid{
+      display:grid;
+
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+      gap:20px;
+    }
+
+    .kpi-box{
+      background:#111827;
+
+      padding:24px;
+
+      border-radius:20px;
+
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    /* ISSUES */
+
+    .issue{
+      background:#111827;
+
+      padding:20px;
+
+      border-radius:18px;
+
+      margin-bottom:18px;
+    }
+
+    .issue strong{
+      color:#fca5a5;
+    }
+
+    .solution{
+      margin-top:8px;
+
+      color:#86efac;
+    }
+
+    code{
+      background:#172554;
+
+      padding:4px 10px;
+
+      border-radius:8px;
+
+      color:#93c5fd;
+    }
+
+    .footer{
+      text-align:center;
+
+      opacity:.5;
+
+      margin-top:30px;
+
+      font-size:.9rem;
+    }
+
+    /* MOBILE */
+
+    @media(max-width:900px){
+
+      aside{
+        transform:translateX(-100%);
+      }
+
+      aside.mobile-open{
+        transform:translateX(0);
+      }
+
+      main{
+        margin-left:0;
+        width:100%;
+        padding:20px;
+      }
+
+      .hero{
+        padding:35px;
+      }
+
+      .hero h1{
+        font-size:2rem;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- TOGGLE BUTTON -->
+
+  <button class="toggle-btn" onclick="toggleSidebar()">
+    ☰
+  </button>
+
+  <!-- SIDEBAR -->
+
+  <aside id="sidebar">
+
+    <div class="logo">
+      <h2 style="padding:15px;">Med4u SOP</h2>
+      <p style="padding-left:15px;">HR & Recruitment</p>
+    </div>
+
+    <nav class="menu">
+      <a href="#objective">1. Objective</a>
+      <a href="#scope">2. Scope</a>
+      <a href="#responsibilities">3. Responsibilities</a>
+      <a href="#workflow">4. Workflow</a>
+      <a href="#kpi">5. KPI</a>
+      <a href="#issues">6. Issues & Solutions</a>
+      <a href="#best-practices">7. Best Practices</a>
+      <a href="#tasks">8. Daily / Weekly</a>
+    </nav>
+
+  </aside>
+
+  <!-- MAIN -->
+
+  <main id="main-content">
+
+    <section class="hero">
+
+      <span class="badge">
+        Med4u Internal SOP
+      </span>
+
+      <h1>SOP: HR & Recruitment</h1>
+
+      <p>
+        Standard Operating Procedure สำหรับทีม HR & Recruitment ของ Med4u
+      </p>
+
+    </section>
+
+    <section id="objective">
+
+      <h2>1. Objective</h2>
+
+      <p>
+        สรรหาและคัดเลือกนักศึกษาฝึกงานที่เหมาะสมกับทีม Med4u รวมถึงสนับสนุนงานคอนเทนต์และการสื่อสารขององค์กรให้ดำเนินไปอย่างมีประสิทธิภาพ
+      </p>
+
+    </section>
+
+    <section id="scope">
+
+      <h2>2. Scope</h2>
+
+      <ul>
+        <li>โพสต์รับสมัคร</li>
+        <li>คัดกรองผู้สมัคร</li>
+        <li>นัดสัมภาษณ์</li>
+        <li>สนับสนุนงานเขียนบทความและคอนเทนต์</li>
+      </ul>
+
+    </section>
+
+    <section id="responsibilities">
+
+      <h2>3. Responsibilities</h2>
+
+      <h3>Recruitment</h3>
+
+      <ul>
+        <li>โพสต์ประกาศรับสมัครฝึกงานตามช่องทางที่กำหนด (Facebook)</li>
+        <li>ตรวจสอบและคัดกรอง CV / Portfolio</li>
+        <li>ติดต่อผู้สมัครและนัดสัมภาษณ์ (Line @)</li>
+        <li>อัปเดตสถานะผู้สมัครในระบบ (Trello)</li>
+      </ul>
+
+      <h3>Content Support</h3>
+
+      <ul>
+        <li>เขียนบทความหรือคอนเทนต์ตามที่ได้รับมอบหมาย</li>
+        <li>ประสานงานกับทีม Content / Admin</li>
+        <li>ตรวจสอบความถูกต้องของข้อมูลก่อนส่งงาน</li>
+      </ul>
+
+    </section>
+
+    <section id="workflow">
+
+      <h2>4. Workflow</h2>
+
+      <div class="workflow-grid">
+
+        <div class="card">
+
+          <h4>Step 1: Recruitment Post</h4>
+
+          <ul>
+            <li>ตรวจสอบตำแหน่งที่เปิดรับ</li>
+            <li>ใช้ Template ของทีม</li>
+            <li>โพสต์ลง Facebook</li>
+            <br>
+          </ul>
+
+          <div class="check">
+            ✅ รายละเอียดครบ<br>
+            ✅ มีช่องทางสมัคร
+          </div>
+
+        </div>
+
+        <div class="card">
+
+          <h4>Step 2: CV Screening</h4>
+
+          <ul>
+            <li>ตรวจ CV และ Portfolio</li>
+            <li>ประเมินความเหมาะสม</li>
+            <li>แบ่งสถานะผู้สมัคร</li>
+            <li>อัปเดตข้อมูลลงระบบ</li>
+          </ul>
+
+          <div class="check">
+            ✅ ตรวจครบทุกฉบับ<br>
+            ✅ อัปเดตสถานะแล้ว
+          </div>
+
+        </div>
+
+        <div class="card">
+
+          <h4>Step 3: Interview</h4>
+
+          <ul>
+            <li>ติดต่อผ่าน LINE / Facebook</li>
+            <li>ส่งวันเวลาสัมภาษณ์</li>
+            <li>แจ้งรายละเอียด</li>
+            <li>บันทึกลง Calendar</li>
+          </ul>
+
+          <div class="check">
+            ✅ ยืนยันเวลาแล้ว<br>
+            ✅ บันทึกในระบบแล้ว
+          </div>
+
+        </div>
+
+        <div class="card">
+
+          <h4>Step 4: Content Writing</h4>
+
+          <ul>
+            <li>รับหัวข้อจากทีม</li>
+            <li>Research ข้อมูล</li>
+            <li>ใช้ AI ช่วยร่าง</li>
+            <li>ตรวจ Grammar / Fact</li>
+          </ul>
+
+          <div class="check">
+            ✅ เนื้อหาถูกต้อง<br>
+            ✅ อ่านง่าย
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section id="kpi"> 
+      <h2>5. KPI</h2> 
+      <div class="kpi-grid"> 
+        <div class="kpi-box"> 
+          <h3>Recruitment KPI</h3> 
+          <ul> 
+            <li>จำนวนผู้สมัครต่อสัปดาห์</li> 
+            <li>ระยะเวลาคัดกรอง CV</li> 
+            <li>จำนวนผู้ผ่านสัมภาษณ์</li> 
+          </ul> 
+        </div> 
+        
+        <div class="kpi-box"> 
+          <h3>Content KPI</h3> 
+          <ul> 
+            <li>จำนวนบทความต่อสัปดาห์</li> 
+            <li>คุณภาพของเนื้อหา</li> 
+            <li>Engagement ของบทความ</li> 
+          </ul> 
+        </div> 
+      </div> 
+    </section> 
+    
+    <section id="issues"> 
+      <h2>6. Common Issues & Solutions</h2> 
+      <div class="issue"> <strong>🔸 ผู้สมัครตอบช้า</strong> 
+        <div class="solution">✅ Follow up ภายใน 24 ชั่วโมง</div> 
+      </div> 
+      <div class="issue"> 
+        <strong>🔸 CV ไม่ตรงตำแหน่ง</strong> 
+        <div class="solution">✅ ใช้เกณฑ์มาตรฐานในการคัดกรอง</div> 
+      </div> 
+      <div class="issue"> 
+        <strong>🔸 ใช้ AI มากเกินไป</strong> 
+        <div class="solution">✅ ต้องเรียบเรียงและตรวจ Fact ทุกครั้ง</div> 
+      </div> 
+    </section> 
+    
+    <section id="best-practices"> 
+      <h2>7. Best Practices</h2> 
+      <ul> 
+        <li>ตอบผู้สมัครด้วยความสุภาพและ Professional</li> 
+        <li>อัปเดตสถานะงานทุกวัน</li> 
+        <li>ใช้ AI เป็นผู้ช่วย ไม่ใช่ผู้ทำแทน</li> 
+        <li>ตรวจงานก่อนส่งทุกครั้ง</li> 
+      </ul> 
+    </section> 
+    
+    <section id="tasks"> 
+      <h2>8. Daily / Weekly Tasks</h2> 
+      <h3>Daily</h3> 
+      <ul> 
+        <li>ตรวจผู้สมัครใหม่</li> 
+        <li>คัดกรอง CV</li> 
+        <li>ตอบข้อความ</li> 
+        <li>อัปเดต Trello</li> 
+      </ul> 
+      <h3>Weekly</h3> 
+      <ul> 
+        <li>สรุปจำนวนผู้สมัคร</li> 
+        <li>สรุปสถานะสัมภาษณ์</li> 
+        <li>ส่งบทความประจำสัปดาห์</li> 
+        <li>รายงาน Progress ให้ทีม</li> 
+      </ul> 
+    </section>
+    
+      <div class="footer">
+      Med4u SOP System © 2026
+    </div>
+
+  </main>
+
+  <script>
+
+    function toggleSidebar(){
+
+      const sidebar = document.getElementById("sidebar");
+      const main = document.getElementById("main-content");
+
+      sidebar.classList.toggle("closed");
+      main.classList.toggle("full");
+
+      if(window.innerWidth <= 900){
+        sidebar.classList.toggle("mobile-open");
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>
