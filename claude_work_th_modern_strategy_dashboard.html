@@ -1028,79 +1028,49 @@
         background: #08101e;
       }
 
-      	.shell {
-        	display: block;
-      	}
+      .shell {
+        display: block;
+      }
 
-      	.sidebar,
-      	.print {
-        	display: none;
-      	}
+      .sidebar,
+      .print {
+        display: none;
+      }
 
-      	.content {
-        	padding: 0;
-      	}
+      .content {
+        padding: 0;
+      }
 
-      	.section {
-      	  break-inside: avoid;
-     	 }
-    	}
-		}
-    	.split-button{
-  			position: fixed !important;
+      .section {
+        break-inside: avoid;
+      }
+    }
+    .floating-buttons{
+  		position: fixed;
+  		right: 22px;
+  		bottom: 22px;
+  		z-index: 20;
 
-  			right: 22px;
-  			bottom: 22px;
-  			z-index: 9999;
-
-  			display: flex;
-  			align-items: center;
-
-  			overflow: hidden;
-
-  			border-radius: 999px;
-  			border: 1px solid var(--line);
-
-  			background: linear-gradient(135deg, var(--cyan), var(--emerald));
-
-  			box-shadow: var(--shadow);
-  			backdrop-filter: blur(20px);
+  		display: flex;
+  		gap: 10px;
 		}
 
-		.split-button button{
-  			border: none;
-			background: transparent;
+		.floating-buttons .btn{
+  		box-shadow: var(--shadow);
+		}
 
-  			color: #06121f;
-  			font-weight: 800;
-  			font-size: 14px;
+		@media (max-width: 760px){
+  		.floating-buttons{
+    	position: static;
+    	width: 100%;
+    	margin-top: 18px;
 
-  			padding: 12px 18px;
-  			cursor: pointer;
-  			transition: 0.2s ease;
-			}
+    	flex-direction: column;
+  	}
 
-	  	.split-button button:hover{
-  			background: rgba(255,255,255,0.18);
-			}
-
-	  	.split-button .divider{
-  			width: 1px;
-  			height: 24px;
-		  	background: rgba(6,18,31,0.35);
-			}
-
-	  @media (max-width:760px){
-
-  	  	.split-button{
-			right: 14px;
-		  	bottom: 14px;
-  			}
-
-  		.split-button button{
-			padding: 11px 14px;
-    		font-size: 13px;
-  			}
+  	.floating-buttons .btn{
+    	width: 100%;
+  		}
 		}
   </style>
 </head>
@@ -1839,18 +1809,19 @@
         <div class="footer-note">
           Strategic recommendation: build the Claude Work Starter Kit first, use it to capture leads and understand audience pain points, then launch the Prompt & Workflow Pack before investing time into a larger course.
         </div>
-      </div>    
-    </main>
-	  <div class="split-button">
-  			<button onclick="window.location.href='index.html'">
+      </div>
+      
+      <div class="floating-buttons">
+  			<button class="btn primary" onclick="window.location.href='index.html'">
     			Home
   			</button>
 
-  		<div class="divider"></div>
-  			<button onclick="window.location.href='med_ai_strategy_dashboard.html'">
+  			<button class="btn primary" onclick="window.location.href='med_ai_strategy_dashboard.html'">
     			Med4U Plan
   			</button>
-		</div>
+			</div>
+      
+    </main>
   </div>
 
   <script>
