@@ -356,7 +356,21 @@
       background: linear-gradient(135deg, var(--cyan), var(--teal) 58%, var(--lime));
       box-shadow: 0 16px 42px rgba(48, 215, 255, 0.18);
     }
+    
+    .floating-buttons{
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 9999;
 
+      display: flex;
+      gap: 10px;
+    }
+
+    .floating-buttons .btn{
+      box-shadow: var(--shadow);
+    }
+    
     .hero-meta {
       display: grid;
       gap: 14px;
@@ -1929,9 +1943,15 @@
         Strategic recommendation: make MED a repeatable content and trust system first, then monetize through sponsor-ready audience data, SEO assets, and health brand partnerships.
       </div>
 
-      <button class="btn primary print" onclick="window.location.href='index.html'">Home</button>
-      
-      <button class="btn primary print" onclick="window.location.href='claude_work_th_modern_strategy_dashboard.html'">Claude Plan</button>
+      <div class="floating-buttons">
+        <button class="btn primary" onclick="window.location.href='index.html'">
+          Home
+        </button>
+
+        <button class="btn primary" onclick="window.location.href='claude_work_th_modern_strategy_dashboard.html'">
+          Claude Plan
+        </button>
+      </div>
     </main>
   </div>
 
