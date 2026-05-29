@@ -406,6 +406,31 @@
 
     }
 
+    .modal{
+  display:none;
+  position:fixed;
+  z-index:9999;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+
+  background:rgba(0,0,0,.9);
+
+  justify-content:center;
+  align-items:center;
+}
+
+.modal-content{
+  max-width:95%;
+  max-height:95%;
+  border-radius:12px;
+}
+
+.workflow-image{
+  cursor:pointer;
+}
+    
   </style>
 </head>
 
@@ -582,7 +607,8 @@
         </div>
         <img src="images/SOP_Workflow.png"
          alt="Workflow"
-        class="workflow-image">
+         class="workflow-image"
+         onclick="openImage(this.src)">>
       </div>
 
     </section>
@@ -657,6 +683,9 @@
       Med4u SOP System © 2026
     </div>
 
+    <div id="imageModal" class="modal" onclick="closeImage()">
+      <img id="modalImg" class="modal-content">
+    </div>
   </main>
 
   <script>
@@ -675,7 +704,20 @@
 
     }
 
-  </script>
+  function openImage(src){
+  document.getElementById("imageModal").style.display = "flex";
+  document.getElementById("modalImg").src = src;
+}
 
+function closeImage(){
+  document.getElementById("imageModal").style.display = "none";
+}
+    document.addEventListener("keydown", function(e){
+  if(e.key === "Escape"){
+    closeImage();
+  }
+});
+  </script>
+  
 </body>
 </html>
