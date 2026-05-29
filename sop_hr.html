@@ -336,6 +336,41 @@
       border:1px solid rgba(255,255,255,.08);
     }
 
+    .floating-buttons{
+      position:fixed;
+      bottom:25px;
+      right:25px;
+      z-index:1000;
+
+      display:flex;
+      gap:10px;
+    }
+
+    .btn{
+      border:none;
+      cursor:pointer;
+
+      padding:12px 20px;
+      border-radius:12px;
+
+      font-family:'Prompt',sans-serif;
+      font-size:14px;
+      font-weight:600;
+
+      transition:.3s;
+    }
+
+    .btn.primary{
+      background:#2563eb;
+      color:white;
+
+      box-shadow:0 10px 25px rgba(37,99,235,.3);
+    }
+
+    .btn.primary:hover{
+      transform:translateY(-3px);
+    }
+
     /* ISSUES */
 
     .issue{
@@ -686,6 +721,18 @@
     <div id="imageModal" class="modal" onclick="closeImage()">
       <img id="modalImg" class="modal-content">
     </div>
+    
+    <div id="imageModal" class="modal" onclick="closeImage()">
+      <img id="modalImg" class="modal-content">
+    </div>
+
+    <div class="floating-buttons">
+      <button class="btn primary"
+      onclick="window.location.href='index.html'">
+        Home
+      </button>
+    </div>
+    
   </main>
 
   <script>
@@ -704,19 +751,20 @@
 
     }
 
-  function openImage(src){
-  document.getElementById("imageModal").style.display = "flex";
-  document.getElementById("modalImg").src = src;
-}
+    function openImage(src){
+      document.getElementById("imageModal").style.display = "flex";
+      document.getElementById("modalImg").src = src;
+    }
 
-function closeImage(){
-  document.getElementById("imageModal").style.display = "none";
-}
-    document.addEventListener("keydown", function(e){
-  if(e.key === "Escape"){
+    function closeImage(){
+      document.getElementById("imageModal").style.display = "none";
+    }
+      document.addEventListener("keydown", function(e){
+        if(e.key === "Escape"){
     closeImage();
-  }
-});
+    }
+  });
+  
   </script>
   
 </body>
