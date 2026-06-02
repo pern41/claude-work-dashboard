@@ -1060,6 +1060,141 @@
       font-size: 19px;
     }
 
+    .implementation-roadmap {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .implementation-roadmap .roadmap-item {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    .implementation-roadmap .roadmap-item:nth-child(2)::before {
+      background: linear-gradient(90deg, var(--teal), var(--lime));
+    }
+
+    .implementation-roadmap .roadmap-item:nth-child(3)::before {
+      background: linear-gradient(90deg, var(--amber), var(--orange));
+    }
+
+    .implementation-roadmap .roadmap-item:nth-child(4)::before {
+      background: linear-gradient(90deg, var(--blue), var(--violet));
+    }
+
+    .implementation-roadmap .roadmap-item:nth-child(5)::before {
+      background: linear-gradient(90deg, var(--violet), var(--blue));
+    }
+
+    .implementation-roadmap .roadmap-item:nth-child(6)::before {
+      background: linear-gradient(90deg, var(--lime), var(--cyan));
+    }
+
+    .roadmap-title-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .roadmap-title-row h4 {
+      margin: 0;
+    }
+
+    .step-icon {
+      flex: 0 0 36px;
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      color: #031015;
+      background: linear-gradient(135deg, var(--cyan), var(--teal));
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .implementation-roadmap .roadmap-item:nth-child(2) .step-icon {
+      background: linear-gradient(135deg, var(--teal), var(--lime));
+    }
+
+    .implementation-roadmap .roadmap-item:nth-child(3) .step-icon {
+      background: linear-gradient(135deg, var(--amber), var(--orange));
+    }
+
+    .implementation-roadmap .roadmap-item:nth-child(4) .step-icon {
+      background: linear-gradient(135deg, var(--blue), var(--violet));
+    }
+
+    .implementation-roadmap .roadmap-item:nth-child(5) .step-icon {
+      background: linear-gradient(135deg, var(--violet), var(--blue));
+    }
+
+    .implementation-roadmap .roadmap-item:nth-child(6) .step-icon {
+      background: linear-gradient(135deg, var(--lime), var(--cyan));
+    }
+
+    .implementation-roadmap .list {
+      margin-top: 14px;
+    }
+
+    .roadmap-block {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+
+    .roadmap-block h5 {
+      margin: 0 0 8px;
+      color: #eafff9;
+      font-size: 13px;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .roadmap-tree,
+    .roadmap-flow {
+      display: grid;
+      gap: 7px;
+      margin-top: 10px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .roadmap-tree strong {
+      color: var(--text);
+    }
+
+    .roadmap-flow {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      align-items: center;
+      text-align: center;
+    }
+
+    .roadmap-flow span {
+      min-height: 34px;
+      display: grid;
+      place-items: center;
+      padding: 6px 8px;
+      border-radius: var(--radius);
+      color: #eaffff;
+      background: rgba(48, 215, 255, 0.10);
+      border: 1px solid rgba(48, 215, 255, 0.22);
+      font-weight: 800;
+    }
+
+    .year-targets {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      margin-top: 16px;
+    }
+
+    .year-targets .card {
+      min-height: 188px;
+    }
+
     .day-table td:first-child {
       white-space: nowrap;
       color: #eaffff;
@@ -1150,6 +1285,10 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
+      .year-targets {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
       .hero h2 {
         font-size: 42px;
       }
@@ -1216,6 +1355,11 @@
         width: 100%;
       }
 
+      .roadmap-flow,
+      .year-targets {
+        grid-template-columns: 1fr;
+      }
+
       .print {
         position: static;
         margin-top: 18px;
@@ -1278,9 +1422,10 @@
         <button data-section="stp">STP <small>06</small></button>
         <button data-section="brand">Brand <small>07</small></button>
         <button data-section="content">Content <small>08</small></button>
-        <button data-section="money">Monetization <small>09</small></button>
-        <button data-section="kpi">KPI <small>10</small></button>
-        <button data-section="roadmap">90-Day Plan <small>11</small></button>
+        <button data-section="step">Roadmap <small>09</small></button>
+        <button data-section="money">Monetization <small>10</small></button>
+        <button data-section="kpi">KPI <small>11</small></button>
+        <button data-section="roadmap">90-Day Plan <small>12</small></button>
       </nav>
 
       <div class="sidebar-card">
@@ -1755,6 +1900,296 @@
         </div>
       </section>
 
+      <section class="section" id="step">
+        <div class="section-head">
+          <div>
+            <h3>MED Implementation Roadmap</h3>
+            <p>A workflow-based execution plan for building MED from operating system to content engine, traffic funnel, community, lead generation, and revenue.</p>
+          </div>
+          <span class="section-chip">Execution System</span>
+        </div>
+
+        <div class="roadmap implementation-roadmap" aria-label="MED step-by-step implementation roadmap">
+          <article class="roadmap-item">
+            <span class="phase-label">Step 1</span>
+            <div class="roadmap-title-row">
+              <span class="step-icon" aria-hidden="true">01</span>
+              <h4>Build Foundation</h4>
+            </div>
+            <div class="roadmap-block">
+              <h5>Goals</h5>
+              <ul class="list">
+                <li>Create Notion Workspace</li>
+                <li><span style="color: #15e4ff;"> Create SOP Library</span></li>
+                <li>Create Training Hub</li>
+                <li>Create Analytics Dashboard</li>
+                <li>Create Asset Library</li>
+              </ul>
+            </div>
+            <div class="roadmap-block">
+              <h5>Workspace Structure</h5>
+              <div class="roadmap-tree" aria-label="MED workspace structure">
+                <strong>MED</strong>
+                <span>|- SOP</span>
+                <span>|- Content Database</span>
+                <span style="color: #15e4ff;">|- Keyword Database</span>
+                <span style="color: #15e4ff;">|- Content Calendar</span>
+                <span>|- Analytics Dashboard</span>
+                <span>|- Training Hub</span>
+                <span>|- Asset Library</span>
+              </div>
+            </div>
+            <div class="roadmap-block">
+              <h5>Deliverables</h5>
+              <ul class="list">
+                <li>Notion Workspace Completed</li>
+                <li><span style="color: #15e4ff;"> Core SOPs Completed</span></li>
+                <li>Team Onboarding System Ready</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="roadmap-item">
+            <span class="phase-label" style="background: var(--teal)">Step 2</span>
+            <div class="roadmap-title-row">
+              <span class="step-icon" aria-hidden="true">02</span>
+              <h4>Build Content Database</h4>
+            </div>
+            <div class="roadmap-block">
+              <h5>Goals</h5>
+              <ul class="list">
+                <li><span style="color: #15e4ff;"> Create Content Topics</span></li>
+                <li><span style="color: #15e4ff;"> Create Keywords Database</span></li>
+              </ul>
+            </div>
+            <div class="roadmap-block">
+              <h5>Content Categories</h5>
+              <ul class="list">
+                <h5 style="color: #15e4ff;">Tier-S 50%</h5>
+                <li>NCD/โรคทั่วไป เช่น เบาหวาน ความดัน ไขมัน ไต หัวใจ</li>
+                <li>Age 50+ เช่น ข้อเข่า กระดูก ต้อ ปวดเมื่อย อัลไซเมอร์</li>
+                <li>Skin and Hairs เช่น  ผมร่วง สิว ผื่นคัน เชื้อรา</li>
+                <h5 style="color: #15e4ff;">Tier-A 35%</h5>
+                <li>Oval cavity เช่น เหงือก ฟัน หินปูน</li>
+                <li>Brain and nervous system เช่น ไมเกรน เวียนหัว ชา <span style="color: #15e4ff;"> ADHD</span></li>
+                <li>Intestines and digestive เช่น กรดไหลย้อน ท้องผูก มะเร็งลำไส้</li>
+                <li>Bones and Muscle เช่น ปวดเมื่อย ข้อเข่าเสื่อม กระดูกทับเส้นประสาท</li>
+                <h5 style="color: #15e4ff;">Tier-B 10%</h5>
+                <li>Eyes เช่น ต้อ ตาเสื่อม ตาแห้ง สายตาสั้น,ยาว</li>
+                <li>Kids and Teen เช่น สมาธิสั้น พัฒนาการ มือเท้าปาก วัคซีน</li>
+                <li>Otolaryngology เช่น กรน ไซนัส ภูมิแพ้ เจ็บคอ</li>
+                <h5 style="color: #15e4ff;">Tier-c 5%</h5>
+                <li>Obstetrics and Gynecology เช่น PCOS ตั้งครรภ์ วัยทอง ประจำเดือนผิดปกติ</li>
+                <li>Medicine เช่น ยาต่างๆ <span style="color: crimson;"> ไม่แนะนำ</span></li>
+              </ul>
+            </div>
+            <div class="roadmap-block">
+              <h5>Keyword Database Fields</h5>
+              <div class="tag-row">
+                <span class="tag">Keyword</span>
+                <span class="tag">Search Volume</span>
+                <span class="tag">Difficulty</span>
+                <span class="tag">Search Intent</span>
+              </div>
+            </div>
+            <div class="roadmap-block">
+              <h5>Deliverables</h5>
+              <ul class="list">
+                <li>50 Topics Ready</li>
+                <li>100 Keywords Ready</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="roadmap-item">
+            <span class="phase-label" style="background: var(--amber)">Step 3</span>
+            <div class="roadmap-title-row">
+              <span class="step-icon" aria-hidden="true">03</span>
+              <h4>Launch Content Engine</h4>
+            </div>
+            <div class="roadmap-block">
+              <h5>Weekly Targets</h5>
+              <ul class="list">
+                <li>Facebook: 7 Posts</li>
+                <li>Reels: 1 Videos</li>
+                <li>Carousel: 1,2 Posts of 7 Posts</li>
+                <li>SEO: 3 Articles</li>
+              </ul>
+            </div>
+            <div class="roadmap-block">
+              <h5>Monthly Targets</h5>
+              <ul class="list">
+                <li>4-8 Carousel Posts</li>
+                <li>25-30 Facebook Posts</li>
+                <li>12 SEO Articles</li>
+              </ul>
+            </div>
+            <div class="roadmap-block">
+              <h5>Deliverables</h5>
+              <ul class="list">
+                <li>Consistent Publishing Workflow</li>
+                <li>Content Production System Active</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="roadmap-item">
+            <span class="phase-label" style="background: var(--blue)">Step 4</span>
+            <div class="roadmap-title-row">
+              <span class="step-icon" aria-hidden="true">04</span>
+              <h4>Build Traffic Engine</h4>
+            </div>
+            <div class="roadmap-block">
+              <h5>Traffic Flow</h5>
+              <div class="roadmap-flow" aria-label="Content to lead traffic flow">
+                <span>Traffic</span>
+                <span>Community</span>
+                <span>Leads</span>
+                <span>Revenue</span>
+              </div>
+            </div>
+            <div class="roadmap-block">
+              <h5>Requirements</h5>
+              <ul class="list">
+                <span style="color: #15e4ff;">
+                <li>Internal Linking</li>
+                <li>CTA in Every Article</li>
+                <li>Topic Clusters</li>
+                </span>
+              </ul>
+            </div>
+            <div class="roadmap-block">
+              <h5>Deliverables</h5>
+              <ul class="list">
+                <li>Traffic Funnel Active</li>
+                <li>SEO Structure Implemented</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="roadmap-item">
+            <span class="phase-label" style="background: var(--violet)">Step 5</span>
+            <div class="roadmap-title-row">
+              <span class="step-icon" aria-hidden="true">05</span>
+              <h4>Build Lead Generation</h4>
+            </div>
+            <div class="roadmap-block">
+              <h5>Goals</h5>
+              <ul class="list">
+                <li>Create Lead Magnets</li>
+              </ul>
+            </div>
+            <div class="roadmap-block">
+              <h5>Examples</h5>
+              <ul class="list">
+                <li>Weight Loss Ebook</li>
+                <li>Health Checklist</li>
+                <li>Meal Plan, Healthy Menu</li>
+                <li>Workout Plan</li>
+                <li>Sleep Guide</li>
+                <li>Diabetes Guide</li>
+                <li>Office Syndrome Guide</li>
+                <li>Health Calculator</li>
+              </ul>
+            </div>
+            <div class="roadmap-block">
+              <h5>Funnel</h5>
+              <div class="roadmap-flow" aria-label="Lead generation funnel">
+                <span>Social Media</span>
+                <span>Website</span>
+                <span>Lead Magnet</span>
+                <span>Collect Lead</span>
+                <span>Email</span>
+                <span>Nurtur</span>
+                <span>Conversion</span>
+              </div>
+            </div>
+            <div class="roadmap-block">
+              <h5>Deliverables</h5>
+              <ul class="list">
+                <li>Lead Collection System (Get Email or contact)</li>
+                <li>Lead Nurturing Process</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="roadmap-item">
+            <span class="phase-label" style="background: var(--lime)">Step 6</span>
+            <div class="roadmap-title-row">
+              <span class="step-icon" aria-hidden="true">06</span>
+              <h4>Build Revenue</h4>
+            </div>
+            <div class="roadmap-block">
+              <h5>Goals</h5>
+              <ul class="list">
+                <li>Create Media Kit</li>
+                <li>Secure First Sponsor</li>
+                <li>Launch First Digital Product</li>
+              </ul>
+            </div>
+            <div class="roadmap-block">
+              <h5>Products</h5>
+              <ul class="list">
+                <li>Ebook</li>
+                <li>Health Guides</li>
+                <li>Premium Resources</li>
+                <li>Promotion</li>
+              </ul>
+            </div>
+            <div class="roadmap-block">
+              <h5>Deliverables</h5>
+              <ul class="list">
+                <li>First Revenue Generated</li>
+                <li>Monetization System Active</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <div class="roadmap-block">
+          <h5>Final Year Targets</h5>
+        </div>
+
+        <div class="roadmap year-targets" aria-label="MED final year targets">
+          <article class="card">
+            <h4>Content Assets</h4>
+            <ul class="list">
+              <li>100 SEO Articles</li>
+              <li>50-100 Reels</li>
+              <li>20-30 Carousel Posts</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h4>Audience</h4>
+            <ul class="list">
+              <li>10,000 Followers</li>
+              <li>100,000+ Monthly Reach</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h4>Website</h4>
+            <ul class="list">
+              <li>20,000 Monthly Organic Visitors</li>
+              <li>50-100 Ranking Keywords</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h4>Database</h4>
+            <ul class="list">
+              <li>1,000 Email Subscribers</li>
+              <li>Traffic</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h4>Revenue</h4>
+            <ul class="list">
+              <li>Sponsor Revenue</li>
+              <li>Affiliate Revenue</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
       <section class="section" id="money">
         <div class="section-head">
           <div>
@@ -1966,6 +2401,9 @@
       button.addEventListener("click", () => {
         const target = document.getElementById(button.dataset.section);
         if (target) {
+          navButtons.forEach((navButton) => {
+            navButton.classList.toggle("active", navButton === button);
+          });
           target.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       });
@@ -1980,7 +2418,7 @@
       navButtons.forEach((button) => {
         button.classList.toggle("active", button.dataset.section === visible.target.id);
       });
-    }, { rootMargin: "-18% 0px -68% 0px", threshold: [0.08, 0.18, 0.32] });
+    }, { rootMargin: "-18% 0px -68% 0px", threshold: [0.01, 0.08, 0.18, 0.32] });
 
     sections.forEach((section) => observer.observe(section));
 
