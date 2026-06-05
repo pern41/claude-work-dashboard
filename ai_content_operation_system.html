@@ -1008,6 +1008,34 @@
         break-inside: avoid;
       }
     }
+
+    .floating-buttons {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 20;
+
+      display: flex;
+      gap: 10px;
+    }
+
+    .floating-buttons .btn {
+      box-shadow: var(--shadow);
+    }
+
+    @media (max-width: 760px) {
+      .floating-buttons {
+        position: static;
+        width: 100%;
+        margin-top: 18px;
+        flex-direction: column;
+      }
+
+      .floating-buttons .btn {
+        width: 100%;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -1900,7 +1928,11 @@ Every status change should trigger:
         </section>
       </div>
 
-      <button class="btn primary print" onclick="window.print()">Print / Save PDF</button>
+      <div class="floating-buttons">
+        <button class="btn primary" onclick="window.location.href='index.html'">
+          HOME
+        </button>
+      </div>
     </main>
   </div>
 
