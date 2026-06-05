@@ -370,6 +370,232 @@
     .floating-buttons .btn{
       box-shadow: var(--shadow);
     }
+
+    .social-media-generation-analysis,
+    .strategy-insights,
+    .social-media-faq {
+      scroll-margin-top: 22px;
+    }
+
+    .social-media-generation-analysis {
+      position: relative;
+      overflow: hidden;
+      border-color: rgba(48, 215, 255, 0.20);
+      background:
+        linear-gradient(145deg, rgba(48, 215, 255, 0.105), rgba(25, 230, 190, 0.045) 44%, rgba(184, 145, 255, 0.07)),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.082), rgba(255, 255, 255, 0.04));
+    }
+
+    .social-media-generation-analysis a,
+    .social-media-faq a {
+      color: #bff7ff;
+      text-decoration: underline;
+      text-decoration-color: rgba(48, 215, 255, 0.48);
+      text-underline-offset: 4px;
+    }
+
+    .analysis-lede {
+      max-width: 920px;
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .analysis-snapshot {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 20px 0 24px;
+    }
+
+    .snapshot-card {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .snapshot-card span {
+      display: block;
+      color: var(--faint);
+      font-size: 12px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .snapshot-card strong {
+      display: block;
+      margin-top: 6px;
+      color: var(--text);
+      font-size: 24px;
+      line-height: 1.15;
+    }
+
+    .snapshot-card p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .analysis-block {
+      padding: 20px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .analysis-block:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .analysis-block h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      line-height: 1.25;
+    }
+
+    .analysis-block p {
+      max-width: 980px;
+      margin: 0 0 12px;
+      color: var(--muted);
+    }
+
+    .analysis-grid,
+    .platform-grid,
+    .edutainment-grid,
+    .future-grid,
+    .insight-grid,
+    .faq-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .analysis-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .platform-grid,
+    .edutainment-grid,
+    .future-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .analysis-mini-card,
+    .platform-card,
+    .edutainment-card,
+    .future-card,
+    .insight-card,
+    .faq-item {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.048);
+    }
+
+    .analysis-mini-card h4,
+    .platform-card h4,
+    .edutainment-card h4,
+    .future-card h4,
+    .faq-item h3 {
+      margin: 0 0 8px;
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.3;
+    }
+
+    .analysis-mini-card p,
+    .platform-card p,
+    .edutainment-card p,
+    .future-card p,
+    .faq-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .journey-flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .journey-step {
+      min-height: 118px;
+      padding: 15px;
+      border: 1px solid rgba(48, 215, 255, 0.22);
+      border-radius: var(--radius);
+      background: rgba(48, 215, 255, 0.065);
+    }
+
+    .journey-step span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      color: #031015;
+      background: linear-gradient(135deg, var(--cyan), var(--teal));
+      font-weight: 900;
+    }
+
+    .journey-step strong {
+      display: block;
+      margin-top: 10px;
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    .journey-step p {
+      margin: 5px 0 0;
+      font-size: 13px;
+    }
+
+    .strategy-insights,
+    .social-media-faq {
+      margin-top: 22px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(22px);
+    }
+
+    .strategy-insights {
+      background:
+        linear-gradient(135deg, rgba(163, 243, 95, 0.10), rgba(48, 215, 255, 0.08)),
+        rgba(255, 255, 255, 0.045);
+    }
+
+    .strategy-insights h2,
+    .social-media-faq h2 {
+      margin: 0 0 14px;
+      font-size: 27px;
+      line-height: 1.2;
+    }
+
+    .insight-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .insight-card {
+      color: var(--muted);
+    }
+
+    .insight-card strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    .social-media-faq {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.04));
+    }
+
+    .faq-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
     
     .hero-meta {
       display: grid;
@@ -1281,7 +1507,13 @@
       .roadmap,
       .persona-grid,
       .kpi-grid,
-      .metric-strip {
+      .metric-strip,
+      .analysis-snapshot,
+      .platform-grid,
+      .edutainment-grid,
+      .future-grid,
+      .insight-grid,
+      .journey-flow {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
@@ -1333,7 +1565,15 @@
       .kpi-grid,
       .metric-strip,
       .signal-grid,
-      .donut-wrap {
+      .donut-wrap,
+      .analysis-snapshot,
+      .analysis-grid,
+      .platform-grid,
+      .edutainment-grid,
+      .future-grid,
+      .insight-grid,
+      .faq-grid,
+      .journey-flow {
         grid-template-columns: 1fr;
       }
 
@@ -1394,6 +1634,21 @@
         break-inside: avoid;
         box-shadow: none;
       }
+
+      .strategy-insights {
+        margin: 2rem 0;
+        padding: 1.5rem;
+        border-left: 4px solid currentColor;
+        background: rgba(0, 0, 0, 0.04);
+      }
+
+      .strategy-insights h2 {
+        margin-top: 0;
+      }
+
+      .strategy-insights ul {
+        margin-bottom: 0;
+      }
     }
   </style>
 </head>
@@ -1426,6 +1681,9 @@
         <button data-section="money">Monetization <small>10</small></button>
         <button data-section="kpi">KPI <small>11</small></button>
         <button data-section="roadmap">90-Day Plan <small>12</small></button>
+        <button data-section="social-media-generation">Social Search <small>13</small></button>
+        <button data-section="strategy-insights-title">Key Strategic <small>14</small></button>
+        <button data-section="social-media-faq-title">Frequently Asked <small>15</small></button>
       </nav>
 
       <div class="sidebar-card">
@@ -2387,6 +2645,248 @@
           Claude Plan
         </button>
       </div>
+
+      <section class="section social-media-generation-analysis" id="social-media-generation" aria-labelledby="social-media-generation-analysis-title">
+        <div class="section-head">
+          <div>
+            <h3 id="social-media-generation-analysis-title">Social Media Generation Strategy Analysis (2026-2030)</h3>
+            <p>How MED should translate its health authority into video-first discovery, creator trust, social search, and retention across generations.</p>
+          </div>
+          <span class="section-chip">Social search layer</span>
+        </div>
+
+        <p class="analysis-lede">The next growth phase is not simply posting more often. MED needs a connected social media system where Facebook protects retention, TikTok and Instagram create discovery, YouTube builds durable education, and each platform supports the wider <a href="#content">Content Marketing</a>, <a href="#brand">Brand Strategy</a>, and KPI plan already defined in this dashboard.</p>
+
+        <div class="analysis-snapshot" aria-label="Social media strategy snapshot">
+          <article class="snapshot-card">
+            <span>Platform shift</span>
+            <strong>Discovery to dialogue</strong>
+            <p>Facebook becomes stronger for relationship maintenance, community, and follow-up than first-touch discovery.</p>
+          </article>
+          <article class="snapshot-card">
+            <span>Content shift</span>
+            <strong>Text to video proof</strong>
+            <p>Short video turns health education into searchable, shareable, and emotionally easier content.</p>
+          </article>
+          <article class="snapshot-card">
+            <span>Trust shift</span>
+            <strong>Brand to creator voice</strong>
+            <p>Creator-led explanations and real user questions make medical content feel less distant.</p>
+          </article>
+        </div>
+
+        <section class="analysis-block" aria-labelledby="facebook-generation-platform">
+          <h3 id="facebook-generation-platform">1. Facebook Is Becoming an Older Generation Platform</h3>
+          <p>Facebook remains valuable, but its role changes by generation. Gen Alpha rarely treats Facebook as a primary social environment. Gen Z uses it more for family, groups, events, and updates. Gen Y still uses it for community, local commerce, and practical information. Gen X and Baby Boomers continue to rely on Facebook for communication, news, and relationship maintenance.</p>
+          <p>The strategic transition is clear: Facebook is moving from a Discovery Platform to a Communication Platform. For MED, that makes Facebook useful for community retention, family health reminders, group education, customer support, and remarketing after users discover content elsewhere.</p>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Generation</th>
+                  <th>Facebook Role</th>
+                  <th>Best MED Use</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Gen Alpha</td>
+                  <td>Low direct relevance</td>
+                  <td>Reach through parents, educators, YouTube, and short-form video</td>
+                </tr>
+                <tr>
+                  <td>Gen Z</td>
+                  <td>Secondary platform for updates and family connection</td>
+                  <td>Use for groups, events, retargeting, and article distribution</td>
+                </tr>
+                <tr>
+                  <td>Gen Y</td>
+                  <td>Practical daily platform for community and commerce</td>
+                  <td>Use for family health content, marketplace awareness, and community Q&amp;A</td>
+                </tr>
+                <tr>
+                  <td>Gen X</td>
+                  <td>Core communication and information platform</td>
+                  <td>Use for retention, trust-building, reminders, and CRM campaigns</td>
+                </tr>
+                <tr>
+                  <td>Baby Boomer</td>
+                  <td>Primary social and news platform</td>
+                  <td>Use for simple explainers, service communication, and loyalty content</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="analysis-block" aria-labelledby="tiktok-youtube-attention">
+          <h3 id="tiktok-youtube-attention">2. TikTok and YouTube Are Capturing More Attention</h3>
+          <p>TikTok and YouTube win attention because younger audiences prefer video-first behavior. Video reduces cognitive effort: users can see a demonstration, hear tone, judge credibility, read comments, and understand the practical takeaway quickly.</p>
+          <div class="analysis-grid">
+            <article class="analysis-mini-card">
+              <h4>TikTok attention</h4>
+              <p>Short, searchable clips work best for quick questions, myths, symptoms, product comparisons, and fast medical explainers.</p>
+            </article>
+            <article class="analysis-mini-card">
+              <h4>YouTube authority</h4>
+              <p>Long-form explainers and Shorts support evergreen education, deeper trust, and search traffic that compounds over time.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="analysis-block" aria-labelledby="social-media-search-engine">
+          <h3 id="social-media-search-engine">3. Social Media as the New Search Engine</h3>
+          <p>Social media now behaves like a practical search layer. Users search for health symptoms, clinic questions, supplement reviews, prevention tips, and lifestyle decisions inside TikTok, YouTube, Instagram, Facebook groups, and comment threads.</p>
+          <ul class="list">
+            <li><strong>TikTok SEO:</strong> optimize spoken keywords, captions, hashtags, comments, and creator context for discovery-based queries.</li>
+            <li><strong>YouTube SEO:</strong> optimize titles, descriptions, chapters, thumbnails, retention, and long-form educational intent.</li>
+            <li><strong>Social Search Optimization:</strong> answer real patient and family questions across video, comments, community posts, and evergreen articles.</li>
+          </ul>
+        </section>
+
+        <section class="analysis-block" aria-labelledby="creator-economy-advertising">
+          <h3 id="creator-economy-advertising">4. Creator Economy vs Traditional Advertising</h3>
+          <p>Users trust creators more than brands because creator content feels closer to real decision-making. In health media, credibility improves when the message combines expert review, clear examples, real questions, and community feedback instead of only polished brand messaging.</p>
+          <p>User Generated Content, patient questions, pharmacist explanations, doctor commentary, and community-driven review loops can strengthen <a href="#brand">Brand Strategy</a> without making MED feel like a hard-sell advertising channel.</p>
+        </section>
+
+        <section class="analysis-block" aria-labelledby="edutainment-growth">
+          <h3 id="edutainment-growth">5. Edutainment Content Growth</h3>
+          <p>Edutainment combines education and entertainment. For MED, the format should make health knowledge easier to understand while preserving accuracy, source discipline, and clear disclaimers where needed.</p>
+          <div class="edutainment-grid">
+            <article class="edutainment-card">
+              <h4>Health</h4>
+              <p>Myth-busting, symptom explainers, prevention tips, and doctor-reviewed Q&amp;A.</p>
+            </article>
+            <article class="edutainment-card">
+              <h4>Finance</h4>
+              <p>Medical cost planning, insurance basics, savings tips, and healthcare budgeting.</p>
+            </article>
+            <article class="edutainment-card">
+              <h4>Technology</h4>
+              <p>AI health tools, telemedicine workflows, app comparisons, and privacy explainers.</p>
+            </article>
+            <article class="edutainment-card">
+              <h4>Education</h4>
+              <p>Micro-lessons, family health checklists, school health topics, and career learning.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="analysis-block" aria-labelledby="search-shop-show">
+          <h3 id="search-shop-show">6. Search &gt; Shop &gt; Show Consumer Journey</h3>
+          <p>The modern journey is active and social. Users search for an answer, review creator or community proof, compare options, purchase or book, then show their experience through reviews, comments, posts, or short videos.</p>
+          <div class="journey-flow" aria-label="Search review compare purchase show journey">
+            <div class="journey-step">
+              <span>1</span>
+              <strong>Search</strong>
+              <p>User asks a practical question on TikTok, YouTube, Google, or Facebook groups.</p>
+            </div>
+            <div class="journey-step">
+              <span>2</span>
+              <strong>Review</strong>
+              <p>Creator clips, expert posts, and comments help the user judge credibility.</p>
+            </div>
+            <div class="journey-step">
+              <span>3</span>
+              <strong>Compare</strong>
+              <p>User compares symptoms, products, clinics, prices, and advice quality.</p>
+            </div>
+            <div class="journey-step">
+              <span>4</span>
+              <strong>Shop</strong>
+              <p>The decision becomes a purchase, booking, subscription, or saved action.</p>
+            </div>
+            <div class="journey-step">
+              <span>5</span>
+              <strong>Show</strong>
+              <p>The user shares experience, creating new search material for others.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="analysis-block" aria-labelledby="strategic-recommendations">
+          <h3 id="strategic-recommendations">7. Strategic Recommendations</h3>
+          <div class="platform-grid">
+            <article class="platform-card">
+              <h4>Facebook Strategy</h4>
+              <p>Prioritize groups, retention, customer updates, long-caption explainers, Facebook Live Q&amp;A, and remarketing for Gen Y, Gen X, and Baby Boomers.</p>
+            </article>
+            <article class="platform-card">
+              <h4>TikTok Strategy</h4>
+              <p>Build searchable short videos around questions, myths, comparisons, prevention tips, creator collaborations, and fast answer formats.</p>
+            </article>
+            <article class="platform-card">
+              <h4>Instagram Strategy</h4>
+              <p>Use Reels, carousels, creator posts, lifestyle proof, infographics, and save-friendly checklists to support discovery and identity.</p>
+            </article>
+            <article class="platform-card">
+              <h4>YouTube Strategy</h4>
+              <p>Invest in long-form explainers, Shorts, playlists, chapters, and evergreen tutorials that support <a href="#kpi">KPI</a> growth over time.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="analysis-block" aria-labelledby="future-outlook">
+          <h3 id="future-outlook">8. Future Outlook (2026-2030)</h3>
+          <div class="future-grid">
+            <article class="future-card">
+              <h4>Platform evolution</h4>
+              <p>Feeds become more AI-personalized, video search improves, and social commerce becomes more embedded in discovery.</p>
+            </article>
+            <article class="future-card">
+              <h4>Creator economy growth</h4>
+              <p>Brands will need expert creators, community moderators, and customer storytellers as part of the operating model.</p>
+            </article>
+            <article class="future-card">
+              <h4>Search behavior changes</h4>
+              <p>Users will expect answers across Google, TikTok, YouTube, Instagram, and private communities, not one search channel.</p>
+            </article>
+            <article class="future-card">
+              <h4>MED opportunity</h4>
+              <p>The strongest path is a connected <a href="#roadmap">90-day plan</a> that turns trusted health content into searchable social proof.</p>
+            </article>
+          </div>
+        </section>
+      </section>
+
+      <aside class="strategy-insights" id="strategy-insights" aria-labelledby="strategy-insights-title">
+        <h2 id="strategy-insights-title">Key Strategic Insights</h2>
+        <div class="insight-grid">
+          <div class="insight-card"><strong>Facebook</strong>Facebook is shifting toward communication and retention.</div>
+          <div class="insight-card"><strong>TikTok</strong>TikTok is becoming a discovery and search platform.</div>
+          <div class="insight-card"><strong>YouTube</strong>YouTube dominates educational content consumption.</div>
+          <div class="insight-card"><strong>Creator trust</strong>Creator trust exceeds brand trust among younger audiences.</div>
+          <div class="insight-card"><strong>Video-first</strong>Video-first content is becoming the default format.</div>
+          <div class="insight-card"><strong>Consumer model</strong>Search &gt; Shop &gt; Show is the emerging consumer behavior model.</div>
+        </div>
+      </aside>
+
+      <section class="social-media-faq" id="social-media-faq" aria-labelledby="social-media-faq-title">
+        <h2 id="social-media-faq-title">Frequently Asked Questions</h2>
+        <div class="faq-grid">
+          <article class="faq-item">
+            <h3>Why is Facebook usage declining among younger users?</h3>
+            <p>Facebook usage is declining among younger users because Gen Alpha and Gen Z prefer faster, more visual, creator-led platforms such as TikTok, YouTube, and Instagram. Facebook is now more useful for family connection, groups, events, and communication than youth-driven discovery.</p>
+          </article>
+          <article class="faq-item">
+            <h3>What is Search Shop Show behavior?</h3>
+            <p>Search Shop Show behavior describes a modern consumer journey where users search for information on social platforms, shop after reviewing creator and community proof, and then show their own experience through posts, reviews, or videos.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Why does Gen Z trust creators more than brands?</h3>
+            <p>Gen Z often trusts creators more than brands because creators feel more authentic, practical, and relatable. Creator content usually includes real experience, personal opinion, and community feedback, which can feel more credible than traditional advertising.</p>
+          </article>
+          <article class="faq-item">
+            <h3>How important is TikTok SEO?</h3>
+            <p>TikTok SEO is increasingly important because users search TikTok for product reviews, local recommendations, tutorials, trends, and comparisons. Optimized captions, spoken keywords, hashtags, and creator context can improve visibility in social search results.</p>
+          </article>
+          <article class="faq-item">
+            <h3>What is Edutainment content?</h3>
+            <p>Edutainment content combines education and entertainment. It teaches useful information in a format that is easy to watch, share, and remember, especially across video-first platforms.</p>
+          </article>
+        </div>
+      </section>
     </main>
   </div>
 
@@ -2431,5 +2931,53 @@
     window.addEventListener("scroll", updateProgress, { passive: true });
     updateProgress();
   </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why is Facebook usage declining among younger users?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Facebook usage is declining among younger users because Gen Alpha and Gen Z prefer faster, more visual, creator-led platforms such as TikTok, YouTube, and Instagram. Facebook is now more useful for family connection, groups, events, and communication than youth-driven discovery."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is Search Shop Show behavior?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Search Shop Show behavior describes a modern consumer journey where users search for information on social platforms, shop after reviewing creator and community proof, and then show their own experience through posts, reviews, or videos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does Gen Z trust creators more than brands?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Gen Z often trusts creators more than brands because creators feel more authentic, practical, and relatable. Creator content usually includes real experience, personal opinion, and community feedback, which can feel more credible than traditional advertising."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How important is TikTok SEO?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "TikTok SEO is increasingly important because users search TikTok for product reviews, local recommendations, tutorials, trends, and comparisons. Optimized captions, spoken keywords, hashtags, and creator context can improve visibility in social search results."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is Edutainment content?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Edutainment content combines education and entertainment. It teaches useful information in a format that is easy to watch, share, and remember, especially across video-first platforms."
+          }
+        }
+      ]
+    }
+    </script>
 </body>
 </html>
